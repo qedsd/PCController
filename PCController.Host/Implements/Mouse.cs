@@ -20,7 +20,7 @@ namespace PCController.Host.Implements
         {
             if (para != null)
             {
-                return DllImporter.mouse_event(para.DwFlags, para.Dx, para.Dy, para.DwData, para.DwExtraInfo);
+                return DllImporter.mouse_event(para.GetDwFlags(), para.Dx, para.Dy, para.DwData, para.DwExtraInfo);
             }
             else
             {

@@ -16,7 +16,7 @@ namespace PCController
         /// 标志位集，指定点击按钮和鼠标动作的多种情况。此参数里的各位可以是下列值的任何合理组合
         /// MOUSEEVENTF_ABSOLUTE：表明参数dX，dy含有规范化的绝对坐标。如果不设置此位，参数含有相对数据
         /// MOUSEEVENTF_MOVE：表明发生移动
-        /// MOUSEEVENTF_LEFTDOWN：表明接按下鼠标左键
+        /// MOUSEEVENTF_LEFTDOWN：表明按下鼠标左键
         /// MOUSEEVENTF_LEFTUP：表明松开鼠标左键
         /// MOUSEEVENTF_RIGHTDOWN：表明按下鼠标右键
         /// MOUSEEVENTF_RIGHTUP：表明松开鼠标右键

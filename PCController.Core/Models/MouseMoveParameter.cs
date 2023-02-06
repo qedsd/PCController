@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCController.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PCController.Core.Models
 {
+    /// <summary>
+    /// 模拟鼠标参数
+    /// </summary>
     public class MouseMoveParameter
     {
         /// <summary>
@@ -20,10 +24,27 @@ namespace PCController.Core.Models
         /// MOUSEEVENTF_MIDDLEUP：表明松开鼠标中键
         /// MOUSEEVENTF_WHEEL：在Windows NT中如果鼠标有一个轮，表明鼠标轮被移动。移动的数量由dwData给出
         /// </summary>
-        public int DwFlags { get; set; }
+        //public int DwFlags { get; set; }
+
+        public DwFlag[] DwFlags { get; set; }
+
+        /// <summary>
+        /// 从DwFlags计算实际参数
+        /// </summary>
+        /// <returns></returns>
+        public int GetDwFlags()
+        {
+            int res = 0;
+            for(int i = 0;i < DwFlags.Length;i++)
+            {
+                res |= (int)DwFlags[i];
+            }
+            return res;
+        }
+
         /// <summary>
         /// dx：指定鼠标沿x轴的绝对位置或者从上次鼠标事件产生以来移动的数量，依赖于MOUSEEVENTF_ABSOLUTE的设置。
-        /// 给出的绝对数据作为鼠标的实际X坐标；给出的相对数据作为移动的mickeys数。一个mickey表示鼠标移动的数量，表明鼠标已经移动</param>
+        /// 给出的绝对数据作为鼠标的实际X坐标；给出的相对数据作为移动的mickeys数。一个mickey表示鼠标移动的数量，表明鼠标已经移动
         /// </summary>
         public int Dx { get; set; }
         /// <summary>

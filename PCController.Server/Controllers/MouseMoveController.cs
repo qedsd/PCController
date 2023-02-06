@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace PCController.Server.Controllers
 {
+    /// <summary>
+    /// 鼠标移动控制器
+    /// </summary>
     [ApiController]
     [EnableCors("AllowCors")]
     public class MouseMoveController : Controller
@@ -17,7 +20,7 @@ namespace PCController.Server.Controllers
         /// Post示例:
         ///
         ///     {
-        ///        "dwflags": 0x0001,
+        ///        "dwflags": [1,2,4,8,16,32,32768],
         ///        "dx": 1,
         ///        "dy": 2,
         ///        "dwdata": 0,

@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using PCController.Core.Models;
 
 namespace PCController.Server.Controllers
 {
+    /// <summary>
+    /// 光标位置控制器
+    /// </summary>
+    [ApiController]
+    [EnableCors("AllowCors")]
     public class SetCursorrController : Controller
     {
         /// <summary>
-        /// 鼠标移动控制器
+        /// 光标位置控制器
         /// </summary>
         /// <param name="parameter">移动参数</param>
         /// <remarks>
