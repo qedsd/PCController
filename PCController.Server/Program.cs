@@ -1,3 +1,5 @@
+using PCController.Server;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,6 +27,19 @@ builder.Services.AddCors(options =>
             }
         );
 });
+
+#region Æô¶¯websocket
+var wsPort = builder.Configuration.GetSection("WSPort")?.Get<int>();
+if (wsPort == null || wsPort == 0)
+{
+    Console.WriteLine("Î´ÅäÖÃwebsocket¶Ë¿Ú");
+    return;
+}
+else
+{
+    WebSocketService webSocketService = new WebSocketService((int)wsPort);
+}
+#endregion
 
 var app = builder.Build();
 

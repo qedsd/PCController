@@ -34,7 +34,7 @@ namespace PCController
         /// <param name="dwExtraInfo">指定与鼠标事件相关的附加32位值。应用程序调用函数GetMessageExtraInfo来获得此附加信息</param>
         /// <returns></returns>
         [DllImport("user32", CharSet = CharSet.Unicode)]
-        private static extern int mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
+        public static extern int mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
         //移动鼠标
         const int MOUSEEVENTF_MOVE = 0x0001;
         //模拟鼠标左键按下

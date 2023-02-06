@@ -4,10 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>34fdcc3c-8cf9-45e6-98eb-307a9b5a2298</UserSecretsId>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="TouchSocket" Version="1.2.3" />
   </ItemGroup>
 
   <ItemGroup>

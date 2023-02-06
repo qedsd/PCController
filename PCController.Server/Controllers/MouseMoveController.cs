@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using PCController.Core.Models;
 using System.Reflection;
 
 namespace PCController.Server.Controllers
@@ -29,7 +30,7 @@ namespace PCController.Server.Controllers
         [Produces("application/json")]
         public void Post([FromBody] Core.Models.MouseMoveParameter parameter)
         {
-            //TODO:通知目标电脑
+            WebSocketService.Current.SendMsg(new CMDMsg(CMDType.Mouse, parameter));
         }
     }
 }
