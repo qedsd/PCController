@@ -28,19 +28,6 @@ builder.Services.AddCors(options =>
         );
 });
 
-#region Æô¶¯websocket
-var wsPort = builder.Configuration.GetSection("WSPort")?.Get<int>();
-if (wsPort == null || wsPort == 0)
-{
-    Console.WriteLine("Î´ÅäÖÃwebsocket¶Ë¿Ú");
-    return;
-}
-else
-{
-    WebSocketService webSocketService = new WebSocketService((int)wsPort);
-}
-#endregion
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,4 +45,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+#region Æô¶¯websocket
+var wsPort = builder.Configuration.GetSection("WSPort")?.Get<int>();
+if (wsPort == null || wsPort == 0)
+{
+    Console.WriteLine("Î´ÅäÖÃwebsocket¶Ë¿Ú");
+    return;
+}
+else
+{
+    WebSocketService webSocketService = new WebSocketService((int)wsPort);
+}
+#endregion
+
 app.Run();
+

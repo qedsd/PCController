@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCController.Core.Models
+namespace PCController.Core.MsgParameter
 {
     /// <summary>
     /// 模拟鼠标参数
     /// </summary>
-    public class MouseMoveParameter
+    public class MouseMoveParameter: MsgParameter
     {
         /// <summary>
         /// 标志位集，指定点击按钮和鼠标动作的多种情况。此参数里的各位可以是下列值的任何合理组合
@@ -35,7 +35,7 @@ namespace PCController.Core.Models
         public int GetDwFlags()
         {
             int res = 0;
-            for(int i = 0;i < DwFlags.Length;i++)
+            for (int i = 0; i < DwFlags.Length; i++)
             {
                 res |= (int)DwFlags[i];
             }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PCController.Core.Models;
+using PCController.Core.MsgParameter;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json.Serialization;
@@ -11,12 +12,22 @@ using TouchSocket.Sockets;
 namespace PCController.Server
 {
     /// <summary>
-    /// WebSocket用于给Host发送指令，不作消息接受
+    /// WebSocket用于给Host发送、接收指令，解决Host可能的无公网IP问题
     /// </summary>
     public class WebSocketService
     {
+        /// <summary>
+        /// 单例
+        /// </summary>
         public static WebSocketService Current { get; private set; }
+        /// <summary>
+        /// sebsocket服务
+        /// </summary>
         public HttpService Service { get; private set; }
+        /// <summary>
+        /// WebSocketService
+        /// </summary>
+        /// <param name="port"></param>
         public WebSocketService(int port= 7789)
         {
             Current = this;
@@ -41,14 +52,30 @@ namespace PCController.Server
                 //})
                 ).Start();
 
-            Console.WriteLine("Http服务器已启动");
-            Console.WriteLine($"ws://127.0.0.1:{port}/ws");
+            Console.WriteLine($"WebSocket服务器已启动:ws://127.0.0.1:{port}/ws");
 
         }
 
         static void WSCallback(ITcpClientBase client, WSDataFrameEventArgs e)
         {
             Console.WriteLine($"接受到消息：{e.DataFrame.ToText()}");
+            var msg = JsonConvert.DeserializeObject<CMDMsg>(e.DataFrame.ToText());
+            if(msg != null)
+            {
+                switch(msg.Type)
+                {
+                    case Core.Enums.CMDType.HostMgr:
+                        {
+                            //此处只能为第一次建立连接时确认
+                            var host = JsonConvert.DeserializeObject<HostItem>(JsonConvert.SerializeObject(msg.Host));
+                            if(host != null)
+                            {
+                                HostServer.Current.ConfigClient(host.Name, host.Password, client as HttpSocketClient);
+                            }
+                        }
+                        break;
+                }
+            }
         }
 
 
@@ -56,7 +83,14 @@ namespace PCController.Server
         {
             if(msg != null)
             {
-                SendMsg(JsonConvert.SerializeObject(msg));
+                var host = HostServer.Current.Get(msg.Host.Name);
+                if(host != null)
+                {
+                    if(host.IsValidPW(msg.Host.Password))
+                    {
+                        host.Client?.SendWithWS(JsonConvert.SerializeObject(msg));
+                    }
+                } 
             }
         }
         /// <summary>

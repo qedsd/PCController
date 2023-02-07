@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PCController.Core.Enums;
 using PCController.Core.Models;
+using PCController.Core.MsgParameter;
 
 namespace PCController.Server.Controllers
 {
@@ -16,21 +17,20 @@ namespace PCController.Server.Controllers
         /// 光标位置控制器
         /// </summary>
         /// <param name="parameter">移动参数</param>
-        /// <remarks>
-        /// Post示例:
-        ///
-        ///     {
-        ///        "X": 1,
-        ///        "Y": 1,
-        ///     }
-        ///
-        /// </remarks>
         [Route("setcursor")]
         [HttpPost]
         [Produces("application/json")]
-        public void Post([FromBody] Core.Models.SetCursorPosParameter parameter)
+        public RequestResult Post([FromBody] SetCursorPosParameter parameter)
         {
-            WebSocketService.Current.SendMsg(new CMDMsg(CMDType.SetCursor, parameter));
+            if (HostServer.Current.IsValid(parameter.HostName, parameter.GetHostMd5Password()))
+            {
+                WebSocketService.Current.SendMsg(new CMDMsg(parameter.HostName, parameter.GetHostMd5Password(), CMDType.SetCursor, parameter));
+                return new RequestResult(true);
+            }
+            else
+            {
+                return new RequestResult(false, "主机名称密码不匹配");
+            }
         }
     }
 }

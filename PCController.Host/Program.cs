@@ -3,6 +3,7 @@
 
 using Newtonsoft.Json;
 using PCController.Core.Enums;
+using PCController.Core.Helpers;
 using PCController.Core.Models;
 using PCController.Host;
 using PCController.Host.Implements;
@@ -17,10 +18,48 @@ myWSClient.Received += OnReceied;
 //myWSClient.Handshaked += this.MyWSClient_Handshaked;
 
 myWSClient.Setup(new TouchSocketConfig()
-    .SetRemoteIPHost(setting.IPHost));
+    .SetRemoteIPHost(setting.WebSocketIPHost));
 try
 {
     myWSClient.Connect();
+    Console.WriteLine("已建立socket连接，开始注册主机");
+    string msg = new CMDMsg(setting.Name, Md5Helper.ToMd5(setting.Password), CMDType.HostMgr, null).ToString();
+    string reslut = await HttpHelper.PostJsonAsync($"{setting.WebAPIIPHost}/addhost", msg);
+    if(!string.IsNullOrEmpty(reslut))
+    {
+        var res = JsonConvert.DeserializeObject<RequestResult>(reslut);
+        if(res != null && res.Successful)
+        {
+            Console.WriteLine("已成功注册主机，开始确认websocket");
+            myWSClient.SendWithWS(msg);
+            int tryTime = 0;
+            while (tryTime++ != 10)
+            {
+                Thread.Sleep(1000);
+                string reslut2 = await HttpHelper.GetAsync($"{setting.WebAPIIPHost}/hostonline?name={setting.Name}");
+                if (!string.IsNullOrEmpty(reslut2))
+                {
+                    var res2 = JsonConvert.DeserializeObject<RequestResult>(reslut);
+                    if (res != null && res.Successful)
+                    {
+                        Console.WriteLine("websocket确认成功");
+                        Console.WriteLine("系统初始化完成！");
+                        break;
+                    }
+                }
+                Console.WriteLine("websocket确认失败，继续尝试中...");
+            }
+            if(tryTime == 10)
+            {
+                Console.WriteLine("系统初始化失败");
+            }
+        }
+    }
+    else
+    {
+        Console.WriteLine("注册主机失败");
+    }
+    
 }
 catch(Exception ex)
 {
@@ -39,6 +78,7 @@ void OnReceied(WebSocketClient s, WSDataFrame e)
     {
         return;
     }
+    Console.WriteLine($"Received {msg}");
     var cmdMsg = JsonConvert.DeserializeObject<CMDMsg>(msg);
     if(cmdMsg != null)
     {

@@ -9,7 +9,16 @@ namespace PCController.Host
 {
     internal class Setting
     {
-        public string IPHost { get; set; } = "ws://127.0.0.1:7789/ws";
+        public string WebSocketIPHost { get; set; } = "ws://127.0.0.1:7789/ws";
+        public string WebAPIIPHost { get; set; } = "https://localhost:7106";
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name { get; set; } = Guid.NewGuid().ToString().Split('-').First();
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; } = Guid.NewGuid().ToString().Split('-').Last();
 
         public static Setting Load(string path = null)
         {

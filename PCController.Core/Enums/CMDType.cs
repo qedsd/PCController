@@ -12,6 +12,10 @@ namespace PCController.Core.Enums
     public enum CMDType
     {
         /// <summary>
+        /// 管理Host
+        /// </summary>
+        HostMgr,
+        /// <summary>
         /// 获取光标位置
         /// </summary>
         GetCursor, 

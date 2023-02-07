@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCController.Core.Models
+namespace PCController.Core.MsgParameter
 {
     /// <summary>
     /// 模拟键盘参数
     /// </summary>
-    public class KeyboardParameter
+    public class KeyboardParameter: MsgParameter
     {
         /// <summary>
         /// 键盘代码

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PCController.Core.Models;
+using PCController.Core.MsgParameter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
