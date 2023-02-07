@@ -1,5 +1,8 @@
 ﻿//受控制的电脑
+//TODO:websocket或长连接tcp监听服务器指令
+
 using Newtonsoft.Json;
+using PCController.Core.Enums;
 using PCController.Core.Models;
 using PCController.Host;
 using PCController.Host.Implements;
@@ -23,7 +26,7 @@ catch(Exception ex)
 {
     Console.WriteLine(ex.Message);
 }
-Console.WriteLine($"{DateTime.Now}:开始服务");
+
 while (true)
 {
     Console.ReadLine();
@@ -39,7 +42,6 @@ void OnReceied(WebSocketClient s, WSDataFrame e)
     var cmdMsg = JsonConvert.DeserializeObject<CMDMsg>(msg);
     if(cmdMsg != null)
     {
-        Console.WriteLine($"{DateTime.Now}:{cmdMsg}");
         switch(cmdMsg.Type)
         {
             case CMDType.GetCursor: Cursor.GetCursorPos();break;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using PCController.Core.Enums;
 using PCController.Core.Models;
 using System.Reflection;
 
@@ -20,7 +21,7 @@ namespace PCController.Server.Controllers
         /// Post示例:
         ///
         ///     {
-        ///        "dwflags": [1,2,4,8,16,32,32768],
+        ///        "dwflags": 0x0001,
         ///        "dx": 1,
         ///        "dy": 2,
         ///        "dwdata": 0,

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PCController.Core.Enums;
 using PCController.Core.Models;
 
 namespace PCController.Server.Controllers
