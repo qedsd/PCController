@@ -2,40 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PCController.UserUI.MainPage">
-
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Path Fill="Gray"
+                      VerticalOptions="Center"
+                  HorizontalOptions="Center"
+                  Stroke="Gray">
+                <Path.Data>
+                    <EllipseGeometry Center="100,100"
+                     RadiusX="100"
+                     RadiusY="100" />
+                </Path.Data>
+            </Path>
+            <!--<Path Fill="White"
+                      VerticalOptions="Center"
+                  HorizontalOptions="Center"
+                  Stroke="White">
+                    <Path.Data>
+                        <EllipseGeometry Center="50,50"
+                     RadiusX="50"
+                     RadiusY="50" />
+                    </Path.Data>
+                </Path>-->
+            <ImageButton Source="circle.png" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent"
+                             >
+                <ImageButton.GestureRecognizers>
+                    <!--<TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped2" NumberOfTapsRequired="2"/>-->
+                    <!--<DragGestureRecognizer CanDrag="True" DragStarting="DragGestureRecognizer_DragStarting"/>-->
+                    <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+        </Grid>
+        <CollectionView
+         Grid.Column="1"
+         Margin="15" ItemSizingStrategy="MeasureFirstItem">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                             HorizontalItemSpacing="8"
+                             VerticalItemSpacing="8"
+                             Span="3"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
