@@ -51,6 +51,23 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\circle.png" />
 	  <None Remove="Resources\Images\circle.svg" />
+	  <None Remove="Resources\Images\cmd.png" />
+	  <None Remove="Resources\Images\control.png" />
+	  <None Remove="Resources\Images\keyboard.png" />
+	  <None Remove="Resources\Images\mutilwindow.png" />
+	  <None Remove="Resources\Images\setting.png" />
+	  <None Remove="Resources\Images\space.png" />
+	  <None Remove="Resources\Images\windows.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\KeyboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

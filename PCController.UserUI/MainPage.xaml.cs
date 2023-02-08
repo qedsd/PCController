@@ -1,56 +1,64 @@
-﻿namespace PCController.UserUI
+﻿using PCController.UserUI.Models;
+
+namespace PCController.UserUI
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
+            Setting.Current = Setting.Load();
             InitializeComponent();
         }
 
-        private void ImageButton_Pressed(object sender, EventArgs e)
+        private ImageButton MouseImageButton;
+        private void ImageButton_Loaded(object sender, EventArgs e)
         {
-            (sender as ImageButton).WidthRequest = 120;
-            (sender as ImageButton).HeightRequest = 120;
+            MouseImageButton = sender as ImageButton;
+        }
+        private void OnMousePanUpdated(object sender, PanUpdatedEventArgs e)
+        {
+            MouseImageButton.TranslationX = e.TotalX;
+            MouseImageButton.TranslationY = e.TotalY;
         }
 
-        private void ImageButton_Released(object sender, EventArgs e)
+        private async void MouseOuterArea_Tapped(object sender, EventArgs e)
         {
-            (sender as ImageButton).WidthRequest = 100;
-            (sender as ImageButton).HeightRequest = 100;
+            await MousePanLayoutAnimation();
+            Console.WriteLine("鼠标右键单击");
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void MouseOuterArea_Tapped2(object sender, EventArgs e)
         {
-            //DisplayAlert("1", "1","1");
+            await MousePanLayoutAnimation();
+            Console.WriteLine("鼠标右键单双击");
         }
 
-        private void TapGestureRecognizer_Tapped2(object sender, EventArgs e)
+        private async void MousePan_Tapped2(object sender, EventArgs e)
         {
-            //DisplayAlert("2", "2", "2");
+            await MousePanAnimation();
+            Console.WriteLine("鼠标左键双击");
         }
 
-        private void DragGestureRecognizer_DragStarting(object sender, DragStartingEventArgs e)
+        private async void MousePan_Tapped(object sender, EventArgs e)
         {
-            Console.WriteLine("111");
+            await MousePanAnimation();
+            Console.WriteLine("鼠标左键单击");
+        }
+        private async Task MousePanAnimation()
+        {
+            await MouseImageButton.ScaleTo(1.1, 50);
+            await MouseImageButton.ScaleTo(1, 50);
+        }
+        private async Task MousePanLayoutAnimation()
+        {
+            await MousePanLayout.ScaleTo(1.1, 50);
+            await MousePanLayout.ScaleTo(1, 50);
         }
 
-        private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
+        private HorizontalStackLayout MousePanLayout;
+        private void HorizontalStackLayout_Loaded(object sender, EventArgs e)
         {
-            Console.WriteLine(e.TotalX);
+            MousePanLayout = sender as HorizontalStackLayout;
         }
-
-        //private void OnCounterClicked(object sender, EventArgs e)
-        //{
-        //    count++;
-
-        //    if (count == 1)
-        //        CounterBtn.Text = $"Clicked {count} time";
-        //    else
-        //        CounterBtn.Text = $"Clicked {count} times";
-
-        //    SemanticScreenReader.Announce(CounterBtn.Text);
-        //}
     }
 }

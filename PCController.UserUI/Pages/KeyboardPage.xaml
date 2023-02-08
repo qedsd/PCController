@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.KeyboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="KeyboardPage"
+    Background="#f3f4f8">
+    <ContentPage.Resources>
+        <Style x:Key="SmallButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="WidthRequest" Value="34" />
+            <Setter Property="HeightRequest" Value="34" />
+        </Style>
+        <Style x:Key="MediumButton" TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="WidthRequest" Value="54" />
+            <Setter Property="HeightRequest" Value="34" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid Margin="0,0,0,10" VerticalOptions="End">
+        <Grid x:Name="MainKeyboard">
+            <VerticalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button Style="{StaticResource SmallButton}" Text="Q" />
+                    <Button Style="{StaticResource SmallButton}" Text="W" />
+                    <Button Style="{StaticResource SmallButton}" Text="E" />
+                    <Button Style="{StaticResource SmallButton}" Text="R" />
+                    <Button Style="{StaticResource SmallButton}" Text="T" />
+                    <Button Style="{StaticResource SmallButton}" Text="Y" />
+                    <Button Style="{StaticResource SmallButton}" Text="U" />
+                    <Button Style="{StaticResource SmallButton}" Text="I" />
+                    <Button Style="{StaticResource SmallButton}" Text="O" />
+                    <Button Style="{StaticResource SmallButton}" Text="P" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button Style="{StaticResource SmallButton}" Text="A" />
+                    <Button Style="{StaticResource SmallButton}" Text="S" />
+                    <Button Style="{StaticResource SmallButton}" Text="D" />
+                    <Button Style="{StaticResource SmallButton}" Text="F" />
+                    <Button Style="{StaticResource SmallButton}" Text="G" />
+                    <Button Style="{StaticResource SmallButton}" Text="H" />
+                    <Button Style="{StaticResource SmallButton}" Text="J" />
+                    <Button Style="{StaticResource SmallButton}" Text="K" />
+                    <Button Style="{StaticResource SmallButton}" Text="L" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button Style="{StaticResource MediumButton}" Text="Shift" />
+                    <Button Style="{StaticResource SmallButton}" Text="Z" />
+                    <Button Style="{StaticResource SmallButton}" Text="X" />
+                    <Button Style="{StaticResource SmallButton}" Text="C" />
+                    <Button Style="{StaticResource SmallButton}" Text="V" />
+                    <Button Style="{StaticResource SmallButton}" Text="B" />
+                    <Button Style="{StaticResource SmallButton}" Text="N" />
+                    <Button Style="{StaticResource SmallButton}" Text="M" />
+                    <Button
+                        Style="{StaticResource MediumButton}"
+                        Text="×"
+                        TextColor="OrangeRed" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button Style="{StaticResource MediumButton}" Text="Caps" />
+                    <Button Style="{StaticResource MediumButton}" Text="Ctrl" />
+                    <ImageButton
+                        Padding="0,6"
+                        BackgroundColor="White"
+                        HeightRequest="34"
+                        Source="space.png"
+                        WidthRequest="150" />
+                    <Button Style="{StaticResource MediumButton}" Text="Alt" />
+                    <Button Style="{StaticResource MediumButton}" Text="Enter" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button
+                        Clicked="MoreKeyboard_Clicked"
+                        Style="{StaticResource MediumButton}"
+                        Text="&amp;123" />
+                    <Button Style="{StaticResource MediumButton}" Text="Tab" />
+                    <Button Style="{StaticResource MediumButton}" Text="Home" />
+                    <ImageButton
+                        Padding="0,6"
+                        HeightRequest="34"
+                        Source="windows.png"
+                        Style="{StaticResource SmallButton}"
+                        WidthRequest="54" />
+                    <Button Style="{StaticResource MediumButton}" Text="End" />
+                    <Button Style="{StaticResource MediumButton}" Text="Delete" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+        <Grid x:Name="MoreKeyboard" IsVisible="false">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout
+                Grid.Column="0"
+                Margin="10,0,0,0"
+                HorizontalOptions="Start">
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="F1" />
+                    <Button Style="{StaticResource SmallButton}" Text="F2" />
+                    <Button Style="{StaticResource SmallButton}" Text="F3" />
+                    <Button Style="{StaticResource SmallButton}" Text="F4" />
+                    <Button Style="{StaticResource SmallButton}" Text="F5" />
+                    <Button Style="{StaticResource SmallButton}" Text="F6" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="F7" />
+                    <Button Style="{StaticResource SmallButton}" Text="F8" />
+                    <Button Style="{StaticResource SmallButton}" Text="F9" />
+                    <Button Style="{StaticResource SmallButton}" Text="F10" />
+                    <Button Style="{StaticResource SmallButton}" Text="F11" />
+                    <Button Style="{StaticResource SmallButton}" Text="F12" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="!" />
+                    <Button Style="{StaticResource SmallButton}" Text="@" />
+                    <Button Style="{StaticResource SmallButton}" Text="#" />
+                    <Button Style="{StaticResource SmallButton}" Text="$" />
+                    <Button Style="{StaticResource SmallButton}" Text="%" />
+                    <Button Style="{StaticResource SmallButton}" Text="&amp;" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="(" />
+                    <Button Style="{StaticResource SmallButton}" Text=")" />
+                    <Button Style="{StaticResource SmallButton}" Text="-" />
+                    <Button Style="{StaticResource SmallButton}" Text="_" />
+                    <Button Style="{StaticResource SmallButton}" Text="=" />
+                    <Button Style="{StaticResource SmallButton}" Text="+" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="\" />
+                    <Button Style="{StaticResource SmallButton}" Text=";" />
+                    <Button Style="{StaticResource SmallButton}" Text=":" />
+                    <Button Style="{StaticResource SmallButton}" Text="、" />
+                    <Button Style="{StaticResource SmallButton}" Text="*" />
+                    <Button Style="{StaticResource SmallButton}" Text="/" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button
+                        Clicked="MainKeyboard_Clicked"
+                        Style="{StaticResource MediumButton}"
+                        Text="返回" />
+                    <Button Style="{StaticResource MediumButton}" Text="Ctrl" />
+                    <Button Style="{StaticResource SmallButton}" Text="~" />
+                    <Button Style="{StaticResource SmallButton}" Text="&lt;" />
+                    <Button Style="{StaticResource SmallButton}" Text="&gt;" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                Grid.Column="1"
+                Margin="0,0,10,0"
+                HorizontalOptions="Center">
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="1" />
+                    <Button Style="{StaticResource SmallButton}" Text="2" />
+                    <Button Style="{StaticResource SmallButton}" Text="3" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="4" />
+                    <Button Style="{StaticResource SmallButton}" Text="5" />
+                    <Button Style="{StaticResource SmallButton}" Text="6" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="7" />
+                    <Button Style="{StaticResource SmallButton}" Text="8" />
+                    <Button Style="{StaticResource SmallButton}" Text="9" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button
+                        Margin="2"
+                        Padding="0"
+                        Background="White"
+                        HeightRequest="34"
+                        Text="0"
+                        TextColor="Black"
+                        WidthRequest="72" />
+                    <Button Style="{StaticResource SmallButton}" Text="." />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="Pu" />
+                    <Button Style="{StaticResource SmallButton}" Text="↑" />
+                    <Button Style="{StaticResource SmallButton}" Text="Pd" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Button Style="{StaticResource SmallButton}" Text="←" />
+                    <Button Style="{StaticResource SmallButton}" Text="↓" />
+                    <Button Style="{StaticResource SmallButton}" Text="→" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>

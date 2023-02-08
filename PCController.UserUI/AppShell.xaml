@@ -5,10 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PCController.UserUI"
     Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar>
+        <ShellContent
+            Title="控制"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="control.png"
+            Route="MainPage" />
+        <ShellContent
+            Title="键盘"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="keyboard.png"
+            Route="MainPage" />
+        <ShellContent
+            Title="窗口"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="mutilwindow.png"
+            Route="MainPage" />
+        <ShellContent
+            Title="指令"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="cmd.png"
+            Route="MainPage" />
+        <ShellContent
+            Title="设置"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="setting.png"
+            Route="MainPage" />
+    </TabBar>
 </Shell>
