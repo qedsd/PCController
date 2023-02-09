@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.EdtingShortcutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="EdtingShortcutPage">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Entry x:Name="ShortcutName" />
+            <ListView x:Name="KeystatusList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding StatusString}" />
+                            <Button
+                                Grid.Column="2"
+                                Text="×"
+                                TextColor="OrangeRed" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Clicked="AddKey_Clicked" Text="添加按键" />
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

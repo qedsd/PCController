@@ -6,7 +6,6 @@ namespace PCController.UserUI
     {
         public MainPage()
         {
-            Setting.Current = Setting.Load();
             InitializeComponent();
         }
 

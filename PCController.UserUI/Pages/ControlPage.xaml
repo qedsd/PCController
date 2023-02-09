@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.ControlPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:PCController.UserUI.Pages"
+    Title="ControlPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="268" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MouseOuterArea_Tapped" />
+                    <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MouseOuterArea_Tapped2" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <HorizontalStackLayout
+                HeightRequest="200"
+                HorizontalOptions="Center"
+                Loaded="HorizontalStackLayout_Loaded"
+                WidthRequest="200">
+                <Path
+                    Fill="Gray"
+                    HorizontalOptions="Center"
+                    Stroke="Gray"
+                    VerticalOptions="Center">
+                    <Path.Data>
+                        <EllipseGeometry
+                            Center="100,100"
+                            RadiusX="100"
+                            RadiusY="100" />
+                    </Path.Data>
+                </Path>
+            </HorizontalStackLayout>
+            <ImageButton
+                BackgroundColor="Transparent"
+                HeightRequest="100"
+                Loaded="ImageButton_Loaded"
+                Source="circle.png"
+                WidthRequest="100" />
+            <HorizontalStackLayout
+                HeightRequest="200"
+                HorizontalOptions="Center"
+                WidthRequest="200">
+                <Path
+                    Fill="#00FFFFFF"
+                    HorizontalOptions="Center"
+                    Stroke="#00FFFFFF"
+                    VerticalOptions="Center">
+                    <Path.Data>
+                        <EllipseGeometry
+                            Center="100,100"
+                            RadiusX="100"
+                            RadiusY="100" />
+                    </Path.Data>
+                    <Path.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MousePan_Tapped" />
+                        <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MousePan_Tapped2" />
+                        <PanGestureRecognizer PanUpdated="OnMousePanUpdated" />
+                    </Path.GestureRecognizers>
+                </Path>
+            </HorizontalStackLayout>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <pages:KeyboardPage Grid.Row="1" />
+            <ImageButton
+                Margin="0,10,10,0"
+                Clicked="EditShortcut_Clicked"
+                HeightRequest="20"
+                HorizontalOptions="End"
+                Source="edit.png"
+                VerticalOptions="Start"
+                WidthRequest="20" />
+        </Grid>
+    </Grid>
+</ContentPage>

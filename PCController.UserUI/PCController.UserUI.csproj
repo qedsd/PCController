@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\edit.png" />
 	  <None Remove="Resources\Images\circle.png" />
 	  <None Remove="Resources\Images\circle.svg" />
 	  <None Remove="Resources\Images\cmd.png" />
@@ -61,10 +62,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Include="Resources\Images\edit.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\PCController.Core\PCController.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\ShortcutMgrPage.xaml.cs">
+	    <DependentUpon>ShortcutMgrPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\ControlPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\EdtingShortcutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ShortcutMgrPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\KeyboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
