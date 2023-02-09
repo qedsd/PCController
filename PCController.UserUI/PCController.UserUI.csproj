@@ -83,6 +83,9 @@
 	  <MauiXaml Update="Pages\ControlPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\EdtingKeyStatusPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\EdtingShortcutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

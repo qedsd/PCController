@@ -7,7 +7,7 @@
     <ScrollView>
         <VerticalStackLayout>
             <Entry x:Name="ShortcutName" />
-            <ListView x:Name="KeystatusList">
+            <ListView x:Name="KeyStatusList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -20,6 +20,7 @@
                             <Label Grid.Column="1" Text="{Binding StatusString}" />
                             <Button
                                 Grid.Column="2"
+                                Clicked="RemoveKeyStatus_Clicked"
                                 Text="×"
                                 TextColor="OrangeRed" />
                         </Grid>
