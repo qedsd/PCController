@@ -1,4 +1,5 @@
 using PCController.UserUI.Models;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PCController.UserUI.Pages;
@@ -18,38 +19,38 @@ public partial class ShortcutMgrPage : ContentPage
             new Shortcut()
             {
                 Name = "111",
-                KeyStatuses = new List<KeyStatus>()
-            {
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-            }
+                KeyStatuses = new ObservableCollection<KeyStatus>()
+                {
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
+                }
             },
             new Shortcut()
             {
                 Name = "222",
-                KeyStatuses = new List<KeyStatus>()
-            {
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-            }
+                KeyStatuses = new ObservableCollection<KeyStatus>()
+                {
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
+                }
             },
             new Shortcut()
             {
                 Name = "333",
-                KeyStatuses = new List<KeyStatus>()
-            {
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-            }
+                KeyStatuses = new ObservableCollection<KeyStatus>()
+                {
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
+                }
             },
             new Shortcut()
             {
                 Name = "444",
-                KeyStatuses = new List<KeyStatus>()
-            {
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-            }
+                KeyStatuses = new ObservableCollection<KeyStatus>()
+                {
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
+                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
+                }
             }
         };
         Collection.ItemsSource = shortcuts;

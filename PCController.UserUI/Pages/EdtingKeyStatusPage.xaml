@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PCController.UserUI.Pages.EdtingKeyStatusPage"
-             Title="EdtingKeyStatusPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.EdtingKeyStatusPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="EdtingKeyStatusPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <VerticalStackLayout>
+            <TableView Margin="10,0" Intent="Form">
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell
+                            x:Name="KeyName"
+                            Label="键名"
+                            Placeholder="如:ESC键" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Margin="10,0" Intent="Form">
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell
+                            x:Name="KeyCode"
+                            Label="编码"
+                            Placeholder="十六进制如:0x1B" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Label Margin="26,10" Text="状态" />
+            <ListView x:Name="KeyStatusList" Margin="26,10" />
+        </VerticalStackLayout>
+        <Button
+            Grid.Row="1"
+            Margin="20,0,20,10"
+            Clicked="Confirm_Clicked"
+            Text="保存" />
+    </Grid>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PCController.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,23 +21,25 @@ namespace PCController.UserUI.Models
         /// </summary>
         public string HostPassword { get; set; }
         public static Setting Current { get; set; }
-        public static Setting Load(string path = null)
+        public static Setting Load()
         {
-            if (string.IsNullOrEmpty(path))
+            string localPath = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "appsettings.json");
+            if(!System.IO.File.Exists(localPath))
             {
-                path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
+                string content;
+                using (Stream stream = FileSystem.OpenAppPackageFileAsync("appsettings.json").Result)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        content = reader.ReadToEnd();
+                    }
+                }
+                System.IO.File.WriteAllText(localPath, content);
             }
-            if (System.IO.File.Exists(path))
+            string content2 = System.IO.File.ReadAllText(localPath);
+            if (!string.IsNullOrEmpty(content2))
             {
-                string content = System.IO.File.ReadAllText(path);
-                if (!string.IsNullOrEmpty(content))
-                {
-                    return string.IsNullOrEmpty(content) ? new Setting() : JsonConvert.DeserializeObject<Setting>(content);
-                }
-                else
-                {
-                    return new Setting();
-                }
+                return string.IsNullOrEmpty(content2) ? new Setting() : JsonConvert.DeserializeObject<Setting>(content2);
             }
             else
             {
@@ -47,7 +50,7 @@ namespace PCController.UserUI.Models
         {
             if (string.IsNullOrEmpty(path))
             {
-                path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
+                path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "appsettings.json");
             }
             string json = JsonConvert.SerializeObject(this);
             System.IO.File.WriteAllText(path, json);

@@ -3,32 +3,78 @@
     x:Class="PCController.UserUI.Pages.EdtingShortcutPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="EdtingShortcutPage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Entry x:Name="ShortcutName" />
-            <ListView x:Name="KeyStatusList">
-                <ListView.ItemTemplate>
+    Title="编辑快捷键">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TableView Margin="10,0" Intent="Form">
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell x:Name="ShortcutName" Label="快捷键名称" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <CollectionView
+                x:Name="KeyStatusList"
+                Grid.Row="1"
+                Margin="30,10">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="KeyStatusItem_Tapped" />
+                            </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Name}" />
-                            <Label Grid.Column="1" Text="{Binding StatusString}" />
+                            <Label Text="{Binding KeyboardItem.Name}" VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="10,0"
+                                Text="{Binding StatusString}"
+                                VerticalTextAlignment="Center" />
                             <Button
                                 Grid.Column="2"
+                                BackgroundColor="Transparent"
                                 Clicked="RemoveKeyStatus_Clicked"
                                 Text="×"
                                 TextColor="OrangeRed" />
                         </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Clicked="AddKey_Clicked" Text="添加按键" />
-        </VerticalStackLayout>
-
-    </ScrollView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid Grid.Row="2" Margin="20,20,20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="0,0,4,0"
+                    Clicked="AddKey_Clicked"
+                    Text="添加预设按键" />
+                <Button
+                    Grid.Column="1"
+                    Margin="4,0,0,0"
+                    Clicked="AddMyKey_Clicked"
+                    Text="添加自定义按键" />
+            </Grid>
+        </Grid>
+        <Button
+            Grid.Row="1"
+            Margin="20,20,20,10"
+            Clicked="Confirm_Clicked"
+            Text="保存" />
+    </Grid>
 </ContentPage>
