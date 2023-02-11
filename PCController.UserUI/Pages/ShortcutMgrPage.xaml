@@ -3,7 +3,7 @@
     x:Class="PCController.UserUI.Pages.ShortcutMgrPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="ShortcutMgrPage">
+    Title="快捷键管理">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -11,9 +11,10 @@
         </Grid.RowDefinitions>
         <CollectionView
             x:Name="Collection"
-            Grid.Column="1"
+            Grid.Row="0"
             Margin="15"
-            ItemSizingStrategy="MeasureFirstItem">
+            ItemSizingStrategy="MeasureFirstItem"
+            SelectionMode="None">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
                     HorizontalItemSpacing="8"
@@ -23,10 +24,71 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Button Clicked="Button_Clicked" Text="{x:Binding Name}" />
+                    <Grid BackgroundColor="GhostWhite" Padding="10">
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Text="{x:Binding Name}"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                    <!--<Button Clicked="Button_Clicked" Text="{x:Binding Name}">
+                        <Button.GestureRecognizers>
+                    -->
+                    <!--<DragGestureRecognizer
+                                CanDrag="True"
+                                DragStarting="DragGestureRecognizer_DragStarting"
+                                DragStartingCommandParameter="{Binding}" />
+                            <DropGestureRecognizer
+                                AllowDrop="True"
+                                Drop="DropGestureRecognizer_Drop"
+                                DropCommandParameter="{Binding}" />-->
+                    <!--
+                        </Button.GestureRecognizers>
+                    </Button>-->
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="1" Text="+" Clicked="AddShortcut_Clicked" Margin="20,0,20,10"/>
+        <Grid
+            x:Name="MgrGrid"
+            Grid.Row="1"
+            Margin="20,0,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="AddButton"
+                Margin="0,0,4,0"
+                Clicked="AddShortcut_Clicked"
+                Text="添加" />
+            <Button
+                Grid.Column="1"
+                Margin="4,0,0,0"
+                Clicked="Edit_Clicked"
+                Text="编辑" />
+        </Grid>
+
+        <Grid
+            x:Name="EditGrid"
+            Grid.Row="2"
+            Margin="20,0,20,10"
+            IsVisible="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="RemoveButton"
+                Margin="0,0,4,0"
+                BackgroundColor="OrangeRed"
+                Clicked="Remove_Clicked"
+                Text="删除选中" />
+            <Button
+                x:Name="OutEditButton"
+                Grid.Column="1"
+                Margin="4,0,0,0"
+                Clicked="OutEdit_Clicked"
+                Text="退出编辑" />
+        </Grid>
+
     </Grid>
 </ContentPage>

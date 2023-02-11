@@ -7,7 +7,7 @@ namespace PCController.UserUI.Pages;
 public partial class EdtingShortcutPage : ContentPage
 {
     private Shortcut SourceShortcut;
-    private Shortcut Shortcut;
+    public Shortcut Shortcut;
     public EdtingShortcutPage(Shortcut shortcut)
 	{
 		InitializeComponent();
@@ -66,6 +66,7 @@ public partial class EdtingShortcutPage : ContentPage
             Shortcut.KeyStatuses.Remove(key);
         }
     }
+    public bool Saved;
     /// <summary>
     /// 保存快捷键
     /// </summary>
@@ -73,6 +74,7 @@ public partial class EdtingShortcutPage : ContentPage
     /// <param name="e"></param>
     private void Confirm_Clicked(object sender, EventArgs e)
     {
+        Saved = true;
         //最终结果从Shortcut获取
         if (SourceShortcut != null)
         {

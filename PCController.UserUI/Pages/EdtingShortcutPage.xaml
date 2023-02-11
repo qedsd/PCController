@@ -26,7 +26,8 @@
             <CollectionView
                 x:Name="KeyStatusList"
                 Grid.Row="1"
-                Margin="30,10">
+                Margin="26,10"
+                Header="按键列表">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

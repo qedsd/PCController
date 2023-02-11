@@ -29,7 +29,7 @@ public partial class EdtingKeyStatusPage : ContentPage
 	public bool Saved { get;private set; }
     private async void Confirm_Clicked(object sender, EventArgs e)
     {
-		if(!Valid())
+		if(!await Valid())
 		{
 			return;
 		}
@@ -48,12 +48,12 @@ public partial class EdtingKeyStatusPage : ContentPage
 	{
 		if(string.IsNullOrEmpty(KeyName.Text))
 		{
-			await DisplayAlert("信息缺少", "请填写按键名称", "确认");
+			await DisplayAlert("信息缺失", "请填写按键名称", "确认");
 			return false;
 		}
         if (string.IsNullOrEmpty(KeyCode.Text))
         {
-            await DisplayAlert("信息缺少", "请填写按键编码", "确认");
+            await DisplayAlert("信息缺失", "请填写按键编码", "确认");
             return false;
         }
         return true;
