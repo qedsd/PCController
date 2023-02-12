@@ -42,8 +42,9 @@ namespace PCController.Core.Helpers
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }

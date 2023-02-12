@@ -6,12 +6,23 @@
     Title="快捷键管理">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Button
+            x:Name="RemoveButton"
+            Margin="20,10,20,0"
+            BackgroundColor="OrangeRed"
+            IsVisible="false"
+            Text="删除">
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer AllowDrop="True" Drop="RemoveDrop_Drop" />
+            </Button.GestureRecognizers>
+        </Button>
         <CollectionView
             x:Name="Collection"
-            Grid.Row="0"
+            Grid.Row="1"
             Margin="15"
             ItemSizingStrategy="MeasureFirstItem"
             SelectionMode="None">
@@ -24,71 +35,27 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid BackgroundColor="GhostWhite" Padding="10">
-                        <Label
-                            HorizontalTextAlignment="Center"
-                            Text="{x:Binding Name}"
-                            VerticalTextAlignment="Center" />
-                    </Grid>
-                    <!--<Button Clicked="Button_Clicked" Text="{x:Binding Name}">
+                    <Button Clicked="Button_Clicked" Text="{x:Binding Name}">
                         <Button.GestureRecognizers>
-                    -->
-                    <!--<DragGestureRecognizer
+                            <DragGestureRecognizer
                                 CanDrag="True"
                                 DragStarting="DragGestureRecognizer_DragStarting"
-                                DragStartingCommandParameter="{Binding}" />
+                                DragStartingCommandParameter="{Binding}"
+                                DropCompleted="DragGestureRecognizer_DropCompleted" />
                             <DropGestureRecognizer
                                 AllowDrop="True"
                                 Drop="DropGestureRecognizer_Drop"
-                                DropCommandParameter="{Binding}" />-->
-                    <!--
+                                DropCommandParameter="{Binding}" />
                         </Button.GestureRecognizers>
-                    </Button>-->
+                    </Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Grid
-            x:Name="MgrGrid"
-            Grid.Row="1"
-            Margin="20,0,20,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button
-                x:Name="AddButton"
-                Margin="0,0,4,0"
-                Clicked="AddShortcut_Clicked"
-                Text="添加" />
-            <Button
-                Grid.Column="1"
-                Margin="4,0,0,0"
-                Clicked="Edit_Clicked"
-                Text="编辑" />
-        </Grid>
-
-        <Grid
-            x:Name="EditGrid"
+        <Button
+            x:Name="AddButton"
             Grid.Row="2"
             Margin="20,0,20,10"
-            IsVisible="False">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button
-                x:Name="RemoveButton"
-                Margin="0,0,4,0"
-                BackgroundColor="OrangeRed"
-                Clicked="Remove_Clicked"
-                Text="删除选中" />
-            <Button
-                x:Name="OutEditButton"
-                Grid.Column="1"
-                Margin="4,0,0,0"
-                Clicked="OutEdit_Clicked"
-                Text="退出编辑" />
-        </Grid>
-
+            Clicked="AddShortcut_Clicked"
+            Text="添加" />
     </Grid>
 </ContentPage>

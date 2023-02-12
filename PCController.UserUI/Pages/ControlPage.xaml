@@ -7,8 +7,8 @@
     Title="控制">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="268" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid>
@@ -66,15 +66,42 @@
 
         </Grid>
         <Grid Grid.Row="1">
-            <pages:KeyboardPage Grid.Row="1" />
-            <ImageButton
-                Margin="0,10,10,0"
-                Clicked="EditShortcut_Clicked"
-                HeightRequest="20"
-                HorizontalOptions="End"
-                Source="edit.png"
-                VerticalOptions="Start"
-                WidthRequest="20" />
+            <CollectionView
+                x:Name="ShortcutCollection"
+                Grid.Row="1"
+                Margin="15"
+                ItemSizingStrategy="MeasureFirstItem"
+                SelectionMode="None">
+                <CollectionView.Header>
+                    <Grid>
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="快捷键"
+                            TextColor="Gray"
+                            VerticalOptions="Center" />
+                        <ImageButton
+                            Margin="0,0,0,0"
+                            Clicked="EditShortcut_Clicked"
+                            HeightRequest="32"
+                            HorizontalOptions="End"
+                            Source="edit.png"
+                            WidthRequest="80" />
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Clicked="Shortcut_Clicked" Text="{x:Binding Name}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </Grid>
     </Grid>
 </ContentPage>

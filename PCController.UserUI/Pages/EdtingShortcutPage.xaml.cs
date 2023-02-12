@@ -24,6 +24,7 @@ public partial class EdtingShortcutPage : ContentPage
         {
             Shortcut.KeyStatuses = new ObservableCollection<KeyStatus>();
         }
+        ShortcutName.Text = Shortcut.Name;
         KeyStatusList.ItemsSource = Shortcut.KeyStatuses;
     }
 
@@ -72,8 +73,19 @@ public partial class EdtingShortcutPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Confirm_Clicked(object sender, EventArgs e)
+    private async void Confirm_Clicked(object sender, EventArgs e)
     {
+        if(string.IsNullOrEmpty(ShortcutName.Text))
+        {
+            await DisplayAlert("信息缺失", "请填写快捷键名称", "确认");
+            return;
+        }
+        if (Shortcut.KeyStatuses.Count == 0)
+        {
+            await DisplayAlert("信息缺失", "按键不可为空", "确认");
+            return;
+        }
+        Shortcut.Name = ShortcutName.Text;
         Saved = true;
         //最终结果从Shortcut获取
         if (SourceShortcut != null)
@@ -82,12 +94,13 @@ public partial class EdtingShortcutPage : ContentPage
             SourceShortcut.KeyStatuses = Shortcut?.KeyStatuses;
             Shortcut = SourceShortcut;
         }
+        await Navigation.PopAsync();
     }
     #region 编辑选中项
     private async void KeyStatusItem_Tapped(object sender, EventArgs e)
     {
         EdtingKeyStatusPage page = new EdtingKeyStatusPage((sender as BindableObject).BindingContext as KeyStatus);
-        page.NavigatingFrom += EditedKeyStatus; ;
+        page.NavigatingFrom += EditedKeyStatus;
         await Navigation.PushAsync(page);
     }
     /// <summary>

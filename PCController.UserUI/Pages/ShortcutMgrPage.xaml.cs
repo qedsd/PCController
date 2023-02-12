@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using PCController.UserUI.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -21,10 +22,6 @@ public partial class ShortcutMgrPage : ContentPage
     #region 编辑
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        if(EditGrid.IsVisible)
-        {
-            return;
-        }
         Shortcut shortcut = (sender as Button).BindingContext as Shortcut;
         EdtingShortcutPage page = new EdtingShortcutPage(shortcut);
         page.NavigatedFrom += Edit_NavigatedFrom;
@@ -48,67 +45,52 @@ public partial class ShortcutMgrPage : ContentPage
     private async void AddShortcut_Clicked(object sender, EventArgs e)
     {
         EdtingShortcutPage page = new EdtingShortcutPage(null);
-        page.NavigatedFrom += Add_NavigatedFrom;
+        page.NavigatingFrom += Page_NavigatingFrom;
         await Navigation.PushAsync(page);
     }
-    private void Add_NavigatedFrom(object sender, NavigatedFromEventArgs e)
+
+    private void Page_NavigatingFrom(object sender, NavigatingFromEventArgs e)
     {
         EdtingShortcutPage page = sender as EdtingShortcutPage;
-        page.NavigatedFrom -= Add_NavigatedFrom;
+        //page.NavigatedFrom -= Add_NavigatedFrom;
         if (page.Saved)
         {
             Shortcuts.Add(page.Shortcut);
             Save();
         }
     }
+
+    private void Add_NavigatedFrom(object sender, NavigatedFromEventArgs e)
+    {
+       
+    }
     #endregion
 
     private void Init()
     {
-
-        Shortcuts = new ObservableCollection<Shortcut>
+        string path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "shortcuts.json");
+        if(System.IO.File.Exists(path))
         {
-            new Shortcut()
+            string content = System.IO.File.ReadAllText(path);
+            if (!string.IsNullOrEmpty(content))
             {
-                Name = "111",
-                KeyStatuses = new ObservableCollection<KeyStatus>()
-                {
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-                }
-            },
-            new Shortcut()
-            {
-                Name = "222",
-                KeyStatuses = new ObservableCollection<KeyStatus>()
-                {
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-                }
-            },
-            new Shortcut()
-            {
-                Name = "333",
-                KeyStatuses = new ObservableCollection<KeyStatus>()
-                {
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-                }
-            },
-            new Shortcut()
-            {
-                Name = "444",
-                KeyStatuses = new ObservableCollection<KeyStatus>()
-                {
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0},
-                    new KeyStatus() { KeyboardItem = new Core.Models.KeyboardItem(), Status = 0}
-                }
+                Shortcuts =  JsonConvert.DeserializeObject<ObservableCollection<Shortcut>>(content);
             }
-        };
+            else
+            {
+                Shortcuts = new ObservableCollection<Shortcut>();
+            }
+        }
+        else
+        {
+            Shortcuts = new ObservableCollection<Shortcut>();
+        }
     }
     private void Save()
     {
-
+        string path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "shortcuts.json");
+        string json = JsonConvert.SerializeObject(Shortcuts);
+        System.IO.File.WriteAllText(path, json);
     }
 
     /// <summary>
@@ -118,6 +100,7 @@ public partial class ShortcutMgrPage : ContentPage
     /// <param name="e"></param>
     private void DragGestureRecognizer_DragStarting(object sender, DragStartingEventArgs e)
     {
+        RemoveButton.IsVisible = true;
         e.Data.Properties.Add("Shortcut", (sender as DragGestureRecognizer).DragStartingCommandParameter);
     }
     /// <summary>
@@ -143,35 +126,21 @@ public partial class ShortcutMgrPage : ContentPage
         }
     }
 
-    private void Edit_Clicked(object sender, EventArgs e)
+    private async void RemoveDrop_Drop(object sender, DropEventArgs e)
     {
-        Collection.SelectionMode = SelectionMode.Multiple;
-        MgrGrid.IsVisible = false;
-        EditGrid.IsVisible = true;
-    }
-
-    private async void Remove_Clicked(object sender, EventArgs e)
-    {
-        if(Collection.SelectedItems.Count == 0)
+        if(e.Data.Properties.TryGetValue("Shortcut", out var data))
         {
-            await DisplayAlert("?", "请选择要删除的快捷键", "OK");
-        }
-        else
-        {
-            if(await DisplayAlert("?", $"是否确认删除{Collection.SelectedItems.Count}个快捷方式?", "是", "否"))
+            var sourceData = data as Shortcut;
+            if (await DisplayAlert("是否确认", $"确认删除快捷方式:{sourceData.Name}?", "是", "否"))
             {
-                foreach(var item in Collection.SelectedItems)
-                {
-                    Shortcuts.Remove(item as Shortcut);
-                }
+                Shortcuts.Remove(sourceData);
+                Save();
             }
         }
     }
 
-    private void OutEdit_Clicked(object sender, EventArgs e)
+    private void DragGestureRecognizer_DropCompleted(object sender, DropCompletedEventArgs e)
     {
-        Collection.SelectionMode = SelectionMode.None;
-        MgrGrid.IsVisible = true;
-        EditGrid.IsVisible = false;
+        RemoveButton.IsVisible = false;
     }
 }

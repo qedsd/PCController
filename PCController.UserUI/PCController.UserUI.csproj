@@ -99,6 +99,9 @@
 	  <MauiXaml Update="Pages\PickKeyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ShortcutMgrPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
