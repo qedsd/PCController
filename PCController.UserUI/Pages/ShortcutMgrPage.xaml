@@ -25,7 +25,7 @@
             Grid.Row="1"
             Margin="15"
             ItemSizingStrategy="MeasureFirstItem"
-            SelectionMode="None">
+            SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
                     HorizontalItemSpacing="8"
@@ -46,6 +46,7 @@
                                 AllowDrop="True"
                                 Drop="DropGestureRecognizer_Drop"
                                 DropCommandParameter="{Binding}" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
                         </Button.GestureRecognizers>
                     </Button>
                 </DataTemplate>

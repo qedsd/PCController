@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using PCController.UserUI.Controllers;
 using PCController.UserUI.Models;
 using System.Collections.ObjectModel;
 
@@ -90,6 +91,17 @@ public partial class ControlPage : ContentPage
         if (shortcut != null)
         {
             Console.WriteLine(shortcut.Name);
+            foreach(var key in shortcut.KeyStatuses)
+            {
+                if(key.Status == 0)
+                {
+                    KeyboardControl.Down(key.KeyboardItem);
+                }
+                else
+                {
+                    KeyboardControl.Up(key.KeyboardItem);
+                }
+            }
         }
     }
 

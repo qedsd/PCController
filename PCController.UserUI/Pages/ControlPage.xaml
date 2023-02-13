@@ -81,11 +81,12 @@
                             VerticalOptions="Center" />
                         <ImageButton
                             Margin="0,0,0,0"
+                            Padding="4"
                             Clicked="EditShortcut_Clicked"
                             HeightRequest="32"
                             HorizontalOptions="End"
                             Source="edit.png"
-                            WidthRequest="80" />
+                            WidthRequest="60" />
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemsLayout>

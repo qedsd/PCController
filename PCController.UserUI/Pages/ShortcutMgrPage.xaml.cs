@@ -48,6 +48,14 @@ public partial class ShortcutMgrPage : ContentPage
         page.NavigatingFrom += Page_NavigatingFrom;
         await Navigation.PushAsync(page);
     }
+    private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    {
+        var b = sender as Button;
+        var shortcut = b.BindingContext as Shortcut;
+        EdtingShortcutPage page = new EdtingShortcutPage(shortcut);
+        page.NavigatedFrom += Edit_NavigatedFrom;
+        await Navigation.PushAsync(page);
+    }
 
     private void Page_NavigatingFrom(object sender, NavigatingFromEventArgs e)
     {
