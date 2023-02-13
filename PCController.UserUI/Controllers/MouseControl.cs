@@ -14,8 +14,8 @@ namespace PCController.UserUI.Controllers
     {
         internal static void RightClick()
         {
-            RightUp();
             RightDown();
+            RightUp();
         }
         internal static void RightUp()
         {
@@ -43,8 +43,8 @@ namespace PCController.UserUI.Controllers
         }
         internal static void LeftClick()
         {
-            LeftUp();
             LeftDown();
+            LeftUp();
         }
         internal static void LeftUp()
         {
@@ -110,6 +110,8 @@ namespace PCController.UserUI.Controllers
         /// <param name="parameter"></param>
         internal static async void Set(MouseMoveParameter parameter)
         {
+            parameter.HostName = Setting.Current.HostName;
+            parameter.HostPassword= Setting.Current.HostPassword;
             await HttpHelper.PostJsonAsync($"{Setting.Current.WebAPIIPHost}/mousemove", JsonConvert.SerializeObject(parameter));
         }
     }

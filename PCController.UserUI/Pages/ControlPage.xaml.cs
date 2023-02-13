@@ -21,7 +21,7 @@ public partial class ControlPage : ContentPage
     {
         MouseImageButton.TranslationX = e.TotalX;
         MouseImageButton.TranslationY = e.TotalY;
-        Controllers.MouseControl.Move((int)e.TotalX, (int)e.TotalY);
+        Controllers.MouseControl.Move((int)e.TotalX / 4, (int)e.TotalY / 4);
     }
 
     private async void MouseOuterArea_Tapped(object sender, EventArgs e)
