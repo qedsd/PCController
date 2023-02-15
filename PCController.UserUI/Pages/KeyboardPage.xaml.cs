@@ -13,4 +13,10 @@ public partial class KeyboardPage : ContentPage
     {
         
     }
+
+
+    private void SetContent(bool portrait)
+    {
+
+    }
 }

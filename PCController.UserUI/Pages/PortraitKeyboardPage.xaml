@@ -4,9 +4,148 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="PortraitKeyboardPage">
-    <Grid>
-        <VerticalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
+    <Grid Margin="4,10,4,10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CollectionView SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="8"
+                    Orientation="Vertical"
+                    Span="5"
+                    VerticalItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Padding="0,8"
+                        Background="White"
+                        Pressed="Button_Pressed"
+                        Released="Button_Released"
+                        Text="{Binding}"
+                        TextColor="Black" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>!</x:String>
+                    <x:String>@</x:String>
+                    <x:String>#</x:String>
+                    <x:String>$</x:String>
+                    <x:String>%</x:String>
+                    <x:String>&amp;</x:String>
+                    <x:String>(</x:String>
+                    <x:String>)</x:String>
+                    <x:String>-</x:String>
+                    <x:String>_</x:String>
+                    <x:String>+</x:String>
+                    <x:String>\</x:String>
+                    <x:String>;</x:String>
+                    <x:String>:</x:String>
+                    <x:String>、</x:String>
+                    <x:String>*</x:String>
+                    <x:String>/</x:String>
+                    <x:String>~</x:String>
+                    <x:String>Home</x:String>
+                    <x:String>End</x:String>
+                    <x:String>PgUp</x:String>
+                    <x:String>↑</x:String>
+                    <x:String>PgDown</x:String>
+                    <x:String>Delete</x:String>
+                    <x:String>PrtSc</x:String>
+                    <x:String>←</x:String>
+                    <x:String>↓</x:String>
+                    <x:String>→</x:String>
+                    <x:String>Window</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+        </CollectionView>
+        <Grid Grid.Row="1" Margin="0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <CollectionView SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Padding="0,8"
+                            Background="White"
+                            Text="{Binding}"
+                            TextColor="Black" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>F1</x:String>
+                        <x:String>F2</x:String>
+                        <x:String>F3</x:String>
+                        <x:String>F4</x:String>
+                        <x:String>F5</x:String>
+                        <x:String>F6</x:String>
+                        <x:String>F7</x:String>
+                        <x:String>F8</x:String>
+                        <x:String>F9</x:String>
+                        <x:String>F10</x:String>
+                        <x:String>F11</x:String>
+                        <x:String>F12</x:String>
+                    </x:Array>
+                </CollectionView.ItemsSource>
+            </CollectionView>
+            <Rectangle Grid.Column="1" WidthRequest="10" />
+            <CollectionView Grid.Column="2" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Padding="0,8"
+                            Background="White"
+                            Text="{Binding}"
+                            TextColor="Black" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                        <x:String>4</x:String>
+                        <x:String>5</x:String>
+                        <x:String>6</x:String>
+                        <x:String>7</x:String>
+                        <x:String>8</x:String>
+                        <x:String>9</x:String>
+                        <x:String>&lt;</x:String>
+                        <x:String>0</x:String>
+                        <x:String>&gt;</x:String>
+                    </x:Array>
+                </CollectionView.ItemsSource>
+            </CollectionView>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+            <FlexLayout
+                Margin="0,4"
+                AlignItems="Center"
+                Direction="Row"
+                HeightRequest="38"
+                JustifyContent="Center">
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="Q" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="W" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="E" />
@@ -17,8 +156,14 @@
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="I" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="O" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="P" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
+            </FlexLayout>
+            <FlexLayout
+                Grid.Row="1"
+                Margin="0,4"
+                AlignItems="Center"
+                Direction="Row"
+                HeightRequest="48"
+                JustifyContent="Center">
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="A" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="S" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="D" />
@@ -28,8 +173,14 @@
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="J" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="K" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="L" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
+            </FlexLayout>
+            <FlexLayout
+                Grid.Row="1"
+                Margin="0,4"
+                AlignItems="Center"
+                Direction="Row"
+                HeightRequest="48"
+                JustifyContent="Center">
                 <Button Style="{StaticResource MediumKeyboardButton}" Text="Shift" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="Z" />
                 <Button Style="{StaticResource SmallKeyboardButton}" Text="X" />
@@ -42,34 +193,27 @@
                     Style="{StaticResource MediumKeyboardButton}"
                     Text="×"
                     TextColor="OrangeRed" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
+            </FlexLayout>
+            <FlexLayout
+                Grid.Row="1"
+                Margin="0,4"
+                AlignItems="Center"
+                Direction="Row"
+                HeightRequest="48"
+                JustifyContent="Center">
                 <Button Style="{StaticResource MediumKeyboardButton}" Text="Caps" />
                 <Button Style="{StaticResource MediumKeyboardButton}" Text="Ctrl" />
                 <ImageButton
-                    Padding="0,6"
+                    Margin="1,0"
+                    Padding="2"
                     BackgroundColor="White"
-                    HeightRequest="34"
+                    CornerRadius="8"
+                    HeightRequest="48"
                     Source="space.png"
                     WidthRequest="150" />
                 <Button Style="{StaticResource MediumKeyboardButton}" Text="Alt" />
                 <Button Style="{StaticResource MediumKeyboardButton}" Text="Enter" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button
-                    Style="{StaticResource MediumKeyboardButton}"
-                    Text="&amp;123" />
-                <Button Style="{StaticResource MediumKeyboardButton}" Text="Tab" />
-                <Button Style="{StaticResource MediumKeyboardButton}" Text="Home" />
-                <ImageButton
-                    Padding="0,6"
-                    HeightRequest="34"
-                    Source="windows.png"
-                    Style="{StaticResource SmallKeyboardButton}"
-                    WidthRequest="54" />
-                <Button Style="{StaticResource MediumKeyboardButton}" Text="End" />
-                <Button Style="{StaticResource MediumKeyboardButton}" Text="Delete" />
-            </HorizontalStackLayout>
+            </FlexLayout>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
