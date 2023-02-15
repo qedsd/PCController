@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.PortraitKeyboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="PortraitKeyboardPage">
+    <Grid>
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="Q" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="W" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="E" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="R" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="T" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="Y" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="U" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="I" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="O" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="P" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="A" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="S" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="D" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="F" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="G" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="H" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="J" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="K" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="L" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Shift" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="Z" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="X" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="C" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="V" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="B" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="N" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="M" />
+                <Button
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="×"
+                    TextColor="OrangeRed" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Caps" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Ctrl" />
+                <ImageButton
+                    Padding="0,6"
+                    BackgroundColor="White"
+                    HeightRequest="34"
+                    Source="space.png"
+                    WidthRequest="150" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Alt" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Enter" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="&amp;123" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Tab" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Home" />
+                <ImageButton
+                    Padding="0,6"
+                    HeightRequest="34"
+                    Source="windows.png"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    WidthRequest="54" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="End" />
+                <Button Style="{StaticResource MediumKeyboardButton}" Text="Delete" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

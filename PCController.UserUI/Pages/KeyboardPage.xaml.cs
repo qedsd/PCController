@@ -5,18 +5,12 @@ public partial class KeyboardPage : ContentPage
 	public KeyboardPage()
 	{
 		InitializeComponent();
-	}
+        DeviceDisplay.Current.MainDisplayInfoChanged += Current_MainDisplayInfoChanged;
 
-
-    private void MoreKeyboard_Clicked(object sender, EventArgs e)
-    {
-        MainKeyboard.IsVisible = false;
-        MoreKeyboard.IsVisible = true;
     }
 
-    private void MainKeyboard_Clicked(object sender, EventArgs e)
+    private void Current_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
     {
-        MainKeyboard.IsVisible = true;
-        MoreKeyboard.IsVisible = false;
+        
     }
 }

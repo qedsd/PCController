@@ -14,9 +14,9 @@
             Route="ControlPage" />
         <ShellContent
             Title="键盘"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate pages:KeyboardPage}"
             Icon="keyboard.png"
-            Route="MainPage" />
+            Route="KeyboardPage" />
         <ShellContent
             Title="窗口"
             ContentTemplate="{DataTemplate local:MainPage}"
