@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="PCController.UserUI.Views.PortraitKeyboardContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:PCController.Core.Models;assembly=PCController.Core">
+    <Grid Margin="4,10,4,10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CollectionView SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="8"
+                    Orientation="Vertical"
+                    Span="5"
+                    VerticalItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Padding="0,8"
+                        Background="White"
+                        Pressed="Button_Pressed"
+                        Released="Button_Released"
+                        Text="{Binding Name}"
+                        TextColor="Black" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type models:KeyboardItem}">
+                    <models:KeyboardItem Name="`   ~" Code="0xC0" />
+                    <models:KeyboardItem Name="[   {" Code="0xDB" />
+                    <models:KeyboardItem Name="]   }" Code="0xDD" />
+                    <models:KeyboardItem Name="\   |" Code="0xDC" />
+                    <models:KeyboardItem Name=";   :" Code="0xBA" />
+                    <models:KeyboardItem Name="'   &quot;" Code="0xDE" />
+                    <models:KeyboardItem Name=",   &lt;" Code="0xBC" />
+                    <models:KeyboardItem Name=".   &gt;" Code="0xBE" />
+                    <models:KeyboardItem Name="/   ?" Code="0xBF" />
+                    <models:KeyboardItem Name="Home" Code="0x24" />
+                    <models:KeyboardItem Name="End" Code="0x23" />
+                    <models:KeyboardItem Name="PgUp" Code="0x21" />
+                    <models:KeyboardItem Name="↑" Code="0x26" />
+                    <models:KeyboardItem Name="PgDown" Code="0x22" />
+                    <models:KeyboardItem Name="Delete" Code="0x2E" />
+                    <models:KeyboardItem Name="PrtSc" Code="0x2C" />
+                    <models:KeyboardItem Name="←" Code="0x25" />
+                    <models:KeyboardItem Name="↓" Code="0x26" />
+                    <models:KeyboardItem Name="→" Code="0x27" />
+                    <models:KeyboardItem Name="Window" Code="0x5B" />
+                </x:Array>
+            </CollectionView.ItemsSource>
+        </CollectionView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <CollectionView SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Padding="0,8"
+                            Background="White"
+                            Pressed="Button_Pressed"
+                            Released="Button_Released"
+                            Text="{Binding Name}"
+                            TextColor="Black" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type models:KeyboardItem}">
+                        <models:KeyboardItem Name="F1" Code="0x70" />
+                        <models:KeyboardItem Name="F2" Code="0x71" />
+                        <models:KeyboardItem Name="F3" Code="0x72" />
+                        <models:KeyboardItem Name="F4" Code="0x73" />
+                        <models:KeyboardItem Name="F5" Code="0x74" />
+                        <models:KeyboardItem Name="F6" Code="0x75" />
+                        <models:KeyboardItem Name="F7" Code="0x76" />
+                        <models:KeyboardItem Name="F8" Code="0x77" />
+                        <models:KeyboardItem Name="F9" Code="0x78" />
+                        <models:KeyboardItem Name="F10" Code="0x79" />
+                        <models:KeyboardItem Name="F11" Code="0x7A" />
+                        <models:KeyboardItem Name="F12" Code="0x7B" />
+                    </x:Array>
+                </CollectionView.ItemsSource>
+            </CollectionView>
+            <Rectangle Grid.Column="1" WidthRequest="10" />
+            <CollectionView Grid.Column="2" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="3"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Padding="0,8"
+                            Background="White"
+                            Pressed="Button_Pressed"
+                            Released="Button_Released"
+                            Text="{Binding Name}"
+                            TextColor="Black" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsSource>
+                    <x:Array Type="{x:Type models:KeyboardItem}">
+                        <models:KeyboardItem Name="1" Code="0x61" />
+                        <models:KeyboardItem Name="2" Code="0x62" />
+                        <models:KeyboardItem Name="3" Code="0x63" />
+                        <models:KeyboardItem Name="4" Code="0x64" />
+                        <models:KeyboardItem Name="5" Code="0x65" />
+                        <models:KeyboardItem Name="6" Code="0x66" />
+                        <models:KeyboardItem Name="7" Code="0x67" />
+                        <models:KeyboardItem Name="8" Code="0x68" />
+                        <models:KeyboardItem Name="9" Code="0x69" />
+                        <models:KeyboardItem Name="0" Code="0x60" />
+                    </x:Array>
+                </CollectionView.ItemsSource>
+            </CollectionView>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+            <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <Grid.GestureRecognizers />
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="1" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="!" />
+                    <Button
+                        BindingContext="0x31"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="1   !" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="2" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="@" />
+                    <Button
+                        BindingContext="0x32"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="2   @" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="3" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="#" />
+                    <Button
+                        BindingContext="0x33"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="3   #" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="4" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="$" />
+                    <Button
+                        BindingContext="0x34"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="4   $" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="5" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="%" />
+                    <Button
+                        BindingContext="0x35"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="5   %" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="6" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="^" />
+                    <Button
+                        BindingContext="0x36"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="6   ^" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="7" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="&amp;" />
+                    <Button
+                        BindingContext="0x37"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="7   &amp;" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="8" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="*" />
+                    <Button
+                        BindingContext="0x38"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="8   *" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="9" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text="(" />
+                    <Button
+                        BindingContext="0x39"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="9   (" />
+                </Grid>
+
+                <Grid Style="{StaticResource SplitKeyboardGrid}">
+                    <BoxView Style="{StaticResource SplitKeyboardBox}" />
+                    <Label Style="{StaticResource SplitKeyboardUpLabel}" Text="0" />
+                    <Label Style="{StaticResource SplitKeyboardDownLabel}" Text=")" />
+                    <Button
+                        BindingContext="0x30"
+                        Pressed="Button2_Pressed"
+                        Released="Button2_Released"
+                        Style="{StaticResource KeyboardForeButton}"
+                        ToolTipProperties.Text="0   )" />
+                </Grid>
+            </FlexLayout>
+            <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
+                <Button
+                    BindingContext="0x51"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="Q" />
+                <Button
+                    BindingContext="0x57"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="W" />
+                <Button
+                    BindingContext="0x45"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="E" />
+                <Button
+                    BindingContext="0x52"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="R" />
+                <Button
+                    BindingContext="0x54"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="T" />
+                <Button
+                    BindingContext="0x59"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="Y" />
+                <Button
+                    BindingContext="0x55"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="U" />
+                <Button
+                    BindingContext="0x49"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="I" />
+                <Button
+                    BindingContext="0x4F"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="O" />
+                <Button
+                    BindingContext="0x50"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="P" />
+            </FlexLayout>
+            <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
+                <Button
+                    BindingContext="0x41"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="A" />
+                <Button
+                    BindingContext="0x53"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="S" />
+                <Button
+                    BindingContext="0x44"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="D" />
+                <Button
+                    BindingContext="0x46"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="F" />
+                <Button
+                    BindingContext="0x47"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="G" />
+                <Button
+                    BindingContext="0x48"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="H" />
+                <Button
+                    BindingContext="0x4A"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="J" />
+                <Button
+                    BindingContext="0x4B"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="K" />
+                <Button
+                    BindingContext="0x4C"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="L" />
+            </FlexLayout>
+            <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
+                <Button
+                    BindingContext="0x10"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="Shift"
+                    TextColor="DarkSeaGreen" />
+                <Button
+                    BindingContext="0x5A"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="Z" />
+                <Button
+                    BindingContext="0x58"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="X" />
+                <Button
+                    BindingContext="0x43"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="C" />
+                <Button
+                    BindingContext="0x56"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="V" />
+                <Button
+                    BindingContext="0x42"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="B" />
+                <Button
+                    BindingContext="0x4E"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="N" />
+                <Button
+                    BindingContext="0x4D"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource SmallKeyboardButton}"
+                    Text="M" />
+                <Button
+                    BindingContext="0x08"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="×"
+                    TextColor="OrangeRed" />
+            </FlexLayout>
+            <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
+                <Button
+                    BindingContext="0x14"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="Caps" />
+                <Button
+                    BindingContext="0x11"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="Ctrl" />
+                <ImageButton
+                    Margin="1,0"
+                    Padding="0,8"
+                    BackgroundColor="White"
+                    BindingContext="0x20"
+                    CornerRadius="8"
+                    HeightRequest="48"
+                    Pressed="Button4_Pressed"
+                    Released="Button4_Released"
+                    Source="space.png"
+                    ToolTipProperties.Text="空格"
+                    WidthRequest="150" />
+                <Button
+                    BindingContext="0x12"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="Alt" />
+                <Button
+                    BindingContext="0x0D"
+                    Pressed="Button3_Pressed"
+                    Released="Button3_Released"
+                    Style="{StaticResource MediumKeyboardButton}"
+                    Text="Enter" />
+            </FlexLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

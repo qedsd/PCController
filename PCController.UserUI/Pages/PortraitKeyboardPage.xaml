@@ -31,24 +31,15 @@
             </CollectionView.ItemTemplate>
             <CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
-                    <x:String>!</x:String>
-                    <x:String>@</x:String>
-                    <x:String>#</x:String>
-                    <x:String>$</x:String>
-                    <x:String>%</x:String>
-                    <x:String>&amp;</x:String>
-                    <x:String>(</x:String>
-                    <x:String>)</x:String>
-                    <x:String>-</x:String>
-                    <x:String>_</x:String>
-                    <x:String>+</x:String>
-                    <x:String>\</x:String>
-                    <x:String>;</x:String>
-                    <x:String>:</x:String>
-                    <x:String>、</x:String>
-                    <x:String>*</x:String>
-                    <x:String>/</x:String>
-                    <x:String>~</x:String>
+                    <x:String>`/~</x:String>
+                    <x:String>[/{</x:String>
+                    <x:String>]/}</x:String>
+                    <x:String>\/|</x:String>
+                    <x:String>;/:</x:String>
+                    <x:String>'/"</x:String>
+                    <x:String>,/&lt;</x:String>
+                    <x:String>./&gt;</x:String>
+                    <x:String>//?</x:String>
                     <x:String>Home</x:String>
                     <x:String>End</x:String>
                     <x:String>PgUp</x:String>
@@ -140,6 +131,23 @@
             </CollectionView>
         </Grid>
         <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+            <FlexLayout
+                Margin="0,4"
+                AlignItems="Center"
+                Direction="Row"
+                HeightRequest="38"
+                JustifyContent="Center">
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="1/!" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="2/@" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="3/#" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="4/$" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="5/%" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="6/^" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="7/&amp;" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="8/*" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="9/(" />
+                <Button Style="{StaticResource SmallKeyboardButton}" Text="0/)" />
+            </FlexLayout>
             <FlexLayout
                 Margin="0,4"
                 AlignItems="Center"
