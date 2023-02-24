@@ -56,8 +56,14 @@
 	  <None Remove="Resources\Images\control.png" />
 	  <None Remove="Resources\Images\keyboard.png" />
 	  <None Remove="Resources\Images\mutilwindow.png" />
+	  <None Remove="Resources\Images\playlast.png" />
+	  <None Remove="Resources\Images\playnext.png" />
+	  <None Remove="Resources\Images\playpause.png" />
 	  <None Remove="Resources\Images\setting.png" />
 	  <None Remove="Resources\Images\space.png" />
+	  <None Remove="Resources\Images\volumedown.png" />
+	  <None Remove="Resources\Images\volumemute.png" />
+	  <None Remove="Resources\Images\volumeup.png" />
 	  <None Remove="Resources\Images\windows.png" />
 	  <None Remove="Resources\keylist.csv" />
 	</ItemGroup>

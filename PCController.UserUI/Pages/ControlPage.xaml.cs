@@ -110,13 +110,21 @@ public partial class ControlPage : ContentPage
     /// </summary>
     private void InitShortcut()
     {
+        EditShortcutButton2.IsVisible = false;
+        ShortcutCollection.IsVisible = true;
         string path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "shortcuts.json");
         if (System.IO.File.Exists(path))
         {
             string content = System.IO.File.ReadAllText(path);
             if (!string.IsNullOrEmpty(content))
             {
-                ShortcutCollection.ItemsSource = JsonConvert.DeserializeObject<ObservableCollection<Shortcut>>(content);
+                var items = JsonConvert.DeserializeObject<ObservableCollection<Shortcut>>(content);
+                ShortcutCollection.ItemsSource = items;
+                if(items.Count == 0)
+                {
+                    EditShortcutButton2.IsVisible = true;
+                    ShortcutCollection.IsVisible = false;
+                }
             }
         }
     }

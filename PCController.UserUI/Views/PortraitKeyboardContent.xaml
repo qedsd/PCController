@@ -6,16 +6,52 @@
     xmlns:models="clr-namespace:PCController.Core.Models;assembly=PCController.Core">
     <Grid Margin="4,10,4,10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <CollectionView SelectionMode="None">
+        <CollectionView Margin="0,0,0,0" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="4"
+                    Orientation="Vertical"
+                    Span="6"
+                    VerticalItemSpacing="0" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ImageButton
+                        Margin="0"
+                        Padding="0,8"
+                        Background="White"
+                        CornerRadius="8"
+                        HeightRequest="48"
+                        Pressed="Button5_Pressed"
+                        Released="Button5_Released"
+                        Source="{Binding Name}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type models:KeyboardItem}">
+                    <models:KeyboardItem Name="volumedown.png" Code="0xAE" />
+                    <models:KeyboardItem Name="volumemute.png" Code="0xAD" />
+                    <models:KeyboardItem Name="volumeup.png" Code="0xAF" />
+                    <models:KeyboardItem Name="playlast.png" Code="0xB1" />
+                    <models:KeyboardItem Name="playpause.png" Code="0xB3" />
+                    <models:KeyboardItem Name="playnext.png" Code="0xB0" />
+                </x:Array>
+            </CollectionView.ItemsSource>
+        </CollectionView>
+        <CollectionView
+            Grid.Row="1"
+            SelectionMode="None"
+            VerticalOptions="Center">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout
                     HorizontalItemSpacing="8"
                     Orientation="Vertical"
-                    Span="5"
+                    Span="6"
                     VerticalItemSpacing="8" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
@@ -32,6 +68,8 @@
             <CollectionView.ItemsSource>
                 <x:Array Type="{x:Type models:KeyboardItem}">
                     <models:KeyboardItem Name="`   ~" Code="0xC0" />
+                    <models:KeyboardItem Name="-   _" Code="0xBD" />
+                    <models:KeyboardItem Name="=   +" Code="0xBB" />
                     <models:KeyboardItem Name="[   {" Code="0xDB" />
                     <models:KeyboardItem Name="]   }" Code="0xDD" />
                     <models:KeyboardItem Name="\   |" Code="0xDC" />
@@ -42,19 +80,22 @@
                     <models:KeyboardItem Name="/   ?" Code="0xBF" />
                     <models:KeyboardItem Name="Home" Code="0x24" />
                     <models:KeyboardItem Name="End" Code="0x23" />
-                    <models:KeyboardItem Name="PgUp" Code="0x21" />
                     <models:KeyboardItem Name="↑" Code="0x26" />
-                    <models:KeyboardItem Name="PgDown" Code="0x22" />
-                    <models:KeyboardItem Name="Delete" Code="0x2E" />
+                    <models:KeyboardItem Name="PgUp" Code="0x21" />
+                    <models:KeyboardItem Name="PgDn" Code="0x22" />
+                    <models:KeyboardItem Name="Del" Code="0x2E" />
                     <models:KeyboardItem Name="PrtSc" Code="0x2C" />
                     <models:KeyboardItem Name="←" Code="0x25" />
                     <models:KeyboardItem Name="↓" Code="0x26" />
                     <models:KeyboardItem Name="→" Code="0x27" />
-                    <models:KeyboardItem Name="Window" Code="0x5B" />
+                    <models:KeyboardItem Name="Win" Code="0x5B" />
                 </x:Array>
             </CollectionView.ItemsSource>
         </CollectionView>
-        <Grid Grid.Row="1">
+        <Grid
+            Grid.Row="2"
+            Margin="0,8,0,0"
+            VerticalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
@@ -132,7 +173,7 @@
                 </CollectionView.ItemsSource>
             </CollectionView>
         </Grid>
-        <VerticalStackLayout Grid.Row="2" VerticalOptions="End">
+        <VerticalStackLayout Grid.Row="3" VerticalOptions="End">
             <FlexLayout Style="{StaticResource SplitKeyboardFlexLayout}">
                 <Grid Style="{StaticResource SplitKeyboardGrid}">
                     <Grid.GestureRecognizers />

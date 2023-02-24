@@ -387,6 +387,14 @@
         <Setter Property="WidthRequest" Value="34" />
         <Setter Property="HeightRequest" Value="48" />
     </Style>
+    <Style x:Key="SmallKeyboardButtonL" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="WidthRequest" Value="34" />
+        <Setter Property="HeightRequest" Value="34" />
+    </Style>
     <Style x:Key="MediumKeyboardButton" TargetType="Button">
         <Setter Property="Background" Value="White" />
         <Setter Property="TextColor" Value="Black" />
@@ -394,6 +402,14 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="WidthRequest" Value="54" />
         <Setter Property="HeightRequest" Value="48" />
+    </Style>
+    <Style x:Key="MediumKeyboardButtonL" TargetType="Button">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Margin" Value="1,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="WidthRequest" Value="54" />
+        <Setter Property="HeightRequest" Value="34" />
     </Style>
     <RowDefinitionCollection x:Key="SplitKeyboardGridRowDefinitions">
         <RowDefinition />
@@ -420,6 +436,13 @@
         <Setter Property="HeightRequest" Value="46" />
         <Setter Property="JustifyContent" Value="Center" />
     </Style>
+    <Style x:Key="SplitKeyboardFlexLayoutL" TargetType="FlexLayout">
+        <Setter Property="Margin" Value="0,2" />
+        <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Direction" Value="Row" />
+        <Setter Property="HeightRequest" Value="34" />
+        <Setter Property="JustifyContent" Value="Center" />
+    </Style>
     <Style x:Key="SplitKeyboardUpLabel" TargetType="Label">
         <Setter Property="Grid.Row" Value="0" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -429,6 +452,12 @@
         <Setter Property="Grid.Row" Value="1" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="SplitKeyboardDownLabelL" TargetType="Label">
+        <Setter Property="Grid.Row" Value="1" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="Micro"/>
     </Style>
     <Style x:Key="KeyboardForeButton" TargetType="Button">
         <Setter Property="Grid.RowSpan" Value="2" />

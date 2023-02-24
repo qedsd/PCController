@@ -70,6 +70,7 @@
                 x:Name="ShortcutCollection"
                 Grid.Row="1"
                 Margin="15"
+                HeightRequest="400"
                 ItemSizingStrategy="MeasureFirstItem"
                 SelectionMode="None">
                 <CollectionView.Header>
@@ -103,6 +104,14 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button
+                x:Name="EditShortcutButton2"
+                Clicked="EditShortcut_Clicked"
+                HorizontalOptions="Center"
+                Text="添加快捷键"
+                VerticalOptions="Center" />
         </Grid>
     </Grid>
 </ContentPage>
