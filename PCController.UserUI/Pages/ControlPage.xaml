@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="0,0,0,20">
             <Grid>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MouseOuterArea_Tapped" />
@@ -63,9 +63,26 @@
                     </Path.GestureRecognizers>
                 </Path>
             </HorizontalStackLayout>
+            <Grid Margin="10,0" VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    HorizontalOptions="Center"
+                    Text="鼠标灵敏度"
+                    TextColor="Gray" />
+                <Slider
+                    x:Name="MouseStepSlider"
+                    Grid.Row="1"
+                    Maximum="50"
+                    Minimum="1"
+                    ToolTipProperties.Text="鼠标灵敏度"
+                    Value="10" />
+            </Grid>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,20,0,0">
             <CollectionView
                 x:Name="ShortcutCollection"
                 Grid.Row="1"

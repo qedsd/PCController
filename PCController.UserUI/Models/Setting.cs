@@ -20,6 +20,7 @@ namespace PCController.UserUI.Models
         /// 密码
         /// </summary>
         public string HostPassword { get; set; }
+        public double MouseStep { get; set; } = 10;
         public static Setting Current { get; set; }
         public static Setting Load()
         {

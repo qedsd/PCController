@@ -11,6 +11,7 @@ public partial class ControlPage : ContentPage
 	{
 		InitializeComponent();
         InitShortcut();
+        InitMouseStep();
     }
     #region Êó±ê¿ØÖÆ
     private ImageButton MouseImageButton;
@@ -18,11 +19,22 @@ public partial class ControlPage : ContentPage
     {
         MouseImageButton = sender as ImageButton;
     }
+    private double lastX = 0;
+    private double lastY = 0;
     private void OnMousePanUpdated(object sender, PanUpdatedEventArgs e)
     {
-        MouseImageButton.TranslationX = e.TotalX;
-        MouseImageButton.TranslationY = e.TotalY;
-        Controllers.MouseControl.Move((int)e.TotalX / 4, (int)e.TotalY / 4);
+        double totalX = Math.Max(-100, Math.Min(100, e.TotalX));
+        double totalY = Math.Max(-100, Math.Min(100, e.TotalY));
+        Console.WriteLine($"total {totalX} {totalY}");
+        MouseImageButton.TranslationX = totalX;
+        MouseImageButton.TranslationY = totalY;
+        int x = (int)(totalX / 100 * mouseStep);
+        int y = (int)(totalY / 100 * mouseStep);
+        lastX = x; lastY = y;
+        //int x = (int)(e.TotalX > 0 ? mouseStep : -mouseStep);
+        //int y = (int)(e.TotalY > 0 ? mouseStep : -mouseStep);
+        Console.WriteLine($"act {x} {y}");
+        Controllers.MouseControl.Move(x, y);
     }
 
     private async void MouseOuterArea_Tapped(object sender, EventArgs e)
@@ -30,6 +42,7 @@ public partial class ControlPage : ContentPage
         Controllers.MouseControl.RightClick();
         await MousePanLayoutAnimation();
         Console.WriteLine("Êó±êÓÒ¼üµ¥»÷");
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
     }
 
     private async void MouseOuterArea_Tapped2(object sender, EventArgs e)
@@ -38,6 +51,7 @@ public partial class ControlPage : ContentPage
         Controllers.MouseControl.RightClick();
         await MousePanLayoutAnimation();
         Console.WriteLine("Êó±êÓÒ¼üµ¥Ë«»÷");
+        HapticFeedback.Default.Perform(HapticFeedbackType.LongPress);
     }
 
     private async void MousePan_Tapped2(object sender, EventArgs e)
@@ -45,6 +59,7 @@ public partial class ControlPage : ContentPage
         Controllers.MouseControl.LeftClick();
         await MousePanAnimation();
         Console.WriteLine("Êó±ê×ó¼üË«»÷");
+        HapticFeedback.Default.Perform(HapticFeedbackType.LongPress);
     }
 
     private async void MousePan_Tapped(object sender, EventArgs e)
@@ -52,6 +67,7 @@ public partial class ControlPage : ContentPage
         Controllers.MouseControl.LeftClick();
         Controllers.MouseControl.LeftClick();
         await MousePanAnimation();
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
         Console.WriteLine("Êó±ê×ó¼üµ¥»÷");
     }
     private async Task MousePanAnimation()
@@ -91,7 +107,8 @@ public partial class ControlPage : ContentPage
         if (shortcut != null)
         {
             Console.WriteLine(shortcut.Name);
-            foreach(var key in shortcut.KeyStatuses)
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+            foreach (var key in shortcut.KeyStatuses)
             {
                 if(key.Status == 0)
                 {
@@ -110,8 +127,9 @@ public partial class ControlPage : ContentPage
     /// </summary>
     private void InitShortcut()
     {
-        EditShortcutButton2.IsVisible = false;
-        ShortcutCollection.IsVisible = true;
+        EditShortcutButton2.IsVisible = true;
+        ShortcutCollection.IsVisible = false;
+        
         string path = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "shortcuts.json");
         if (System.IO.File.Exists(path))
         {
@@ -120,13 +138,32 @@ public partial class ControlPage : ContentPage
             {
                 var items = JsonConvert.DeserializeObject<ObservableCollection<Shortcut>>(content);
                 ShortcutCollection.ItemsSource = items;
-                if(items.Count == 0)
+                if(items.Count != 0)
                 {
-                    EditShortcutButton2.IsVisible = true;
-                    ShortcutCollection.IsVisible = false;
+                    EditShortcutButton2.IsVisible = false;
+                    ShortcutCollection.IsVisible = true;
                 }
             }
         }
+    }
+    #endregion
+
+
+    #region Êó±êÒÆ¶¯²½½ø
+    private double mouseStep;
+    private void InitMouseStep()
+    {
+        mouseStep = Setting.Current.MouseStep;
+        MouseStepSlider.Value = mouseStep;
+        MouseStepSlider.ValueChanged += OnSliderValueChanged;
+    }
+
+    private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        mouseStep = e.NewValue;
+        Setting.Current.MouseStep = mouseStep;
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+        Setting.Current.Save();
     }
     #endregion
 }
