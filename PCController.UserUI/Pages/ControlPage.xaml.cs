@@ -85,7 +85,7 @@ public partial class ControlPage : ContentPage
         InitShortcut();
     }
 
-    private void Shortcut_Clicked(object sender, EventArgs e)
+    private async void Shortcut_Clicked(object sender, EventArgs e)
     {
         Shortcut shortcut = (sender as Button).BindingContext as Shortcut;
         if (shortcut != null)
@@ -95,11 +95,11 @@ public partial class ControlPage : ContentPage
             {
                 if(key.Status == 0)
                 {
-                    KeyboardControl.Down(key.KeyboardItem);
+                    await KeyboardControl.DownAsync(key.KeyboardItem);
                 }
                 else
                 {
-                    KeyboardControl.Up(key.KeyboardItem);
+                    await KeyboardControl.UpAsync(key.KeyboardItem);
                 }
             }
         }
