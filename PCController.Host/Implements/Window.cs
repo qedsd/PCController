@@ -3,6 +3,7 @@ using PCController.Core.MsgParameter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,21 @@ namespace PCController.Host.Implements
         public static bool ShowWindow(IntPtr hWnd, int nCmdShow)
         {
             return DllImporter.ShowWindow(hWnd, nCmdShow);
+        }
+
+        public static void EnumWindows()
+        {
+            DllImporter.EnumWindows(EnumWindows,0);
+        }
+        public static bool EnumWindows(int hwnd, int lParam)
+        {
+            Console.WriteLine($"{hwnd} {lParam}");
+            return true;
+        }
+        private static bool ShouldWindowBeDisplayed(IntPtr window)
+        {
+            //https://stackoverflow.com/questions/210504/enumerate-windows-like-alt-tab-does
+            return false;
         }
     }
 }

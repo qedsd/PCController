@@ -24,5 +24,11 @@ namespace PCController
         /// <returns></returns>
         [DllImport("User32.dll")]
         public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+
+        public delegate bool CallBack(int hwnd, int lParam);
+
+        [DllImport("user32")]
+        public static extern int EnumWindows(CallBack x, int y);
     }
 }

@@ -11,6 +11,9 @@ using TouchSocket.Core;
 using TouchSocket.Http.WebSockets;
 using TouchSocket.Sockets;
 
+Window.EnumWindows();
+return;
+
 Setting setting = Setting.Load();
 
 WebSocketClient myWSClient = new WebSocketClient();
@@ -59,7 +62,6 @@ try
     {
         Console.WriteLine("注册主机失败");
     }
-    
 }
 catch(Exception ex)
 {
