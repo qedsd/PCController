@@ -26,9 +26,27 @@ namespace PCController
         public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
 
-        public delegate bool CallBack(int hwnd, int lParam);
+        public delegate bool CallBack(IntPtr hwnd, int lParam);
 
         [DllImport("user32")]
         public static extern int EnumWindows(CallBack x, int y);
+
+        [DllImport("user32.dll")]
+        public static extern long GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("User32.dll")]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetAncestor(IntPtr hWnd,uint gaFlags);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetLastActivePopup(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
     }
 }
