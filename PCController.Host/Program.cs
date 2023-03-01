@@ -11,9 +11,6 @@ using TouchSocket.Core;
 using TouchSocket.Http.WebSockets;
 using TouchSocket.Sockets;
 
-Window.EnumWindows();
-return;
-
 Setting setting = Setting.Load();
 
 WebSocketClient myWSClient = new WebSocketClient();

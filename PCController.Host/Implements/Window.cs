@@ -6,8 +6,8 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Win32;
-using Windows.Win32.Foundation;
+//using Windows.Win32;
+//using Windows.Win32.Foundation;
 
 namespace PCController.Host.Implements
 {
@@ -55,24 +55,24 @@ namespace PCController.Host.Implements
             }
             return true;
         }
-        private static bool ShouldWindowBeDisplayed(IntPtr window)
-        {
-            //https://stackoverflow.com/questions/210504/enumerate-windows-like-alt-tab-does
-            //https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowinfo
-            //int windowStyles = PInvoke.GetWindowLong(window, Windows.Win32.UI.WindowsAndMessaging.WINDOW_LONG_PTR_INDEX.GWL_STYLE);
-            long windowStyles = DllImporter.GetWindowLong(window, -16);
-            //if (((uint)0x10000000L & windowStyles) != (uint)0x10000000L ||
-            //    ((uint)0x00040000L & windowStyles) != (uint)0x00040000L)
-            //{
-            //    return true;
-            //}
-            if ((268435456 & windowStyles) != 268435456 ||
-                (262144 & windowStyles) != 262144)
-            {
-                return true;
-            }
-            return false;
-        }
+        //private static bool ShouldWindowBeDisplayed(IntPtr window)
+        //{
+        //    //https://stackoverflow.com/questions/210504/enumerate-windows-like-alt-tab-does
+        //    //https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowinfo
+        //    //int windowStyles = PInvoke.GetWindowLong(window, Windows.Win32.UI.WindowsAndMessaging.WINDOW_LONG_PTR_INDEX.GWL_STYLE);
+        //    long windowStyles = DllImporter.GetWindowLong(window, -16);
+        //    //if (((uint)0x10000000L & windowStyles) != (uint)0x10000000L ||
+        //    //    ((uint)0x00040000L & windowStyles) != (uint)0x00040000L)
+        //    //{
+        //    //    return true;
+        //    //}
+        //    if ((268435456 & windowStyles) != 268435456 ||
+        //        (262144 & windowStyles) != 262144)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         private static string GetWindowTitle(IntPtr hWnd)
         {
