@@ -39,5 +39,13 @@ namespace PCController.Core.Enums
         /// 显示窗口
         /// </summary>
         ShowWindow,
+        /// <summary>
+        /// 执行bat脚本
+        /// </summary>
+        ExcuteBat,
+        /// <summary>
+        /// 获取bat脚本列表
+        /// </summary>
+        GetBatList,
     }
 }

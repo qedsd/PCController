@@ -74,10 +74,18 @@ namespace PCController.Server
                             }
                         }
                         break;
+                    case Core.Enums.CMDType.GetBatList:
+                        {
+                            //主机回复bat列表
+                            //var host = JsonConvert.DeserializeObject<List<string>>(JsonConvert.SerializeObject(msg.Parameter));
+                            Current.OnReceivedBatList?.Invoke(msg);
+                        }
+                        break;
                 }
             }
         }
-
+        internal delegate void ReceiveBatList(CMDMsg msg);
+        internal event ReceiveBatList OnReceivedBatList;
 
         internal void SendMsg(CMDMsg msg)
         {

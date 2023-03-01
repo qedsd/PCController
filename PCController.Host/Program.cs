@@ -1,5 +1,4 @@
 ﻿//受控制的电脑
-//TODO:websocket或长连接tcp监听服务器指令
 
 using Newtonsoft.Json;
 using PCController.Core.Enums;
@@ -11,6 +10,8 @@ using TouchSocket.Core;
 using TouchSocket.Http.WebSockets;
 using TouchSocket.Sockets;
 
+//CMD.ExcuteBat(@"E:\Code\QEDSD\PCController\PCController.Host\bin\Debug\net6.0\CMD\test.bat",false,false,false);
+//return;
 Setting setting = Setting.Load();
 
 WebSocketClient myWSClient = new WebSocketClient();
@@ -89,6 +90,14 @@ void OnReceied(WebSocketClient s, WSDataFrame e)
             case CMDType.Mouse: Mouse.Execute(cmdMsg.Parameter); break;
             case CMDType.SetForegroundWindow: Window.SetForegroundWindow(cmdMsg.Parameter); break;
             case CMDType.ShowWindow: Window.ShowWindow(cmdMsg.Parameter); break;
+            case CMDType.ExcuteBat: CMD.ExcuteBat(cmdMsg.Parameter);break;
+            case CMDType.GetBatList:
+                {
+                    var ls = CMD.GetBatList();
+                    string backMsg = new CMDMsg(setting.Name, Md5Helper.ToMd5(setting.Password), CMDType.GetBatList, ls).ToString();
+                    myWSClient.SendWithWS(backMsg);
+                }
+                break;
         }
     }
 }

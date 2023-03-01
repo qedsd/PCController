@@ -17,14 +17,14 @@
             ContentTemplate="{DataTemplate pages:KeyboardPage}"
             Icon="keyboard.png"
             Route="KeyboardPage" />
-        <!--<ShellContent
-            Title="窗口"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Icon="mutilwindow.png"
-            Route="MainPage" />-->
+        <ShellContent
+            Title="脚本"
+            ContentTemplate="{DataTemplate pages:BatPage}"
+            Icon="bat.png"
+            Route="MainPage" />
         <ShellContent
             Title="指令"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate pages:CMDPage}"
             Icon="cmd.png"
             Route="MainPage" />
         <ShellContent

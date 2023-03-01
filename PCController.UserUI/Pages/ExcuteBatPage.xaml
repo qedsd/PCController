@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.ExcuteBatPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="ExcuteBatPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <VerticalStackLayout>
+            <Label x:Name="BatName" HorizontalOptions="Center" />
+            <HorizontalStackLayout>
+                <Label Text="UseShellExecute" />
+                <Switch x:Name="UseShellExecute" IsToggled="False" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="CreateNoWindow" />
+                <Switch x:Name="CreateNoWindow" IsToggled="False" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="管理员模式允许" />
+                <Switch x:Name="Admin" IsToggled="False" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <Button
+            Grid.Row="1"
+            Text="执行"
+            VerticalOptions="End" 
+            Clicked="Button_Clicked"/>
+    </Grid>
+</ContentPage>

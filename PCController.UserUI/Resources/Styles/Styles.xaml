@@ -457,7 +457,7 @@
         <Setter Property="Grid.Row" Value="1" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="FontSize" Value="Micro"/>
+        <Setter Property="FontSize" Value="Micro" />
     </Style>
     <Style x:Key="KeyboardForeButton" TargetType="Button">
         <Setter Property="Grid.RowSpan" Value="2" />
