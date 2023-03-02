@@ -53,6 +53,7 @@
 	  <None Remove="Resources\Images\bat.png" />
 	  <None Remove="Resources\Images\circle.png" />
 	  <None Remove="Resources\Images\circle.svg" />
+	  <None Remove="Resources\Images\clear.png" />
 	  <None Remove="Resources\Images\cmd.png" />
 	  <None Remove="Resources\Images\control.png" />
 	  <None Remove="Resources\Images\keyboard.png" />

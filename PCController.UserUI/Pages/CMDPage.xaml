@@ -3,37 +3,56 @@
     x:Class="PCController.UserUI.Pages.CMDPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="CMDPage">
+    Title="指令">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label
-            x:Name="ResultLabel"
-            Margin="0,10"
+        <ScrollView
+            Margin="0,0,0,0"
             Padding="10"
-            BackgroundColor="LightGray"
-            LineBreakMode="WordWrap"
-            Text="于此处显示PC返回消息" />
+            HorizontalScrollBarVisibility="Never">
+            <Label
+                x:Name="ResultLabel"
+                BackgroundColor="WhiteSmoke"
+                LineBreakMode="WordWrap"
+                Text="于此处显示PC返回消息" />
+        </ScrollView>
+        <ImageButton
+            Margin="0,0,10,0"
+            Padding="2"
+            Clicked="ClearButton_Clicked"
+            HeightRequest="24"
+            HorizontalOptions="End"
+            Source="clear.png"
+            VerticalOptions="End"
+            WidthRequest="24" />
         <TableView
             Grid.Row="1"
-            Margin="0,10"
             Intent="Form">
             <TableRoot>
                 <TableSection>
-                    <EntryCell x:Name="FileName" Label="FileName" />
+                    <EntryCell
+                        x:Name="FileName"
+                        Label="FileName"
+                        Text="cmd.exe" />
                 </TableSection>
             </TableRoot>
         </TableView>
-        <Label
-            x:Name="InputLabel"
+        <Editor
+            x:Name="InputEditor"
             Grid.Row="2"
-            Margin="0,10"
-            BackgroundColor="LightGray"
-            LineBreakMode="WordWrap"
-            Text="输入命令..."
+            Margin="0,0"
+            IsTextPredictionEnabled="False"
+            Placeholder="输入命令..."
             VerticalOptions="Fill" />
+        <Button
+            Grid.Row="3"
+            Margin="0,0,0,10"
+            Clicked="Button_Clicked"
+            Text="执行" />
     </Grid>
 </ContentPage>

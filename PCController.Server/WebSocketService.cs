@@ -93,7 +93,7 @@ namespace PCController.Server
                                 {
                                     bool su = UserServer.Current.Add(host.Name, new UserItem() { Client = client as HttpSocketClient });
                                     CMDMsg backToUserMsg = new CMDMsg(CMDType.UserMgr,su);
-                                    (client as HttpSocketClient)?.SendWithWS(JsonConvert.SerializeObject(msg));
+                                    (client as HttpSocketClient)?.SendWithWS(JsonConvert.SerializeObject(backToUserMsg));
                                 }
                             }
                         }

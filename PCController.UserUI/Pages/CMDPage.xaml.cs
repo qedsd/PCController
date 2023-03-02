@@ -3,6 +3,9 @@ using PCController.Core.Enums;
 using PCController.Core.Helpers;
 using PCController.Core.Models;
 using PCController.UserUI.Models;
+using System.Diagnostics;
+using System.Net.Sockets;
+using System.Text;
 using TouchSocket.Core;
 using TouchSocket.Http.WebSockets;
 using TouchSocket.Sockets;
@@ -12,7 +15,7 @@ namespace PCController.UserUI.Pages;
 public partial class CMDPage : ContentPage
 {
 	private WebSocketClient webSocket;
-
+    private StringBuilder output = new StringBuilder();
     public CMDPage()
 	{
 		InitializeComponent();
@@ -28,6 +31,7 @@ public partial class CMDPage : ContentPage
 	{
 		webSocket = new WebSocketClient();
 		webSocket.Received += OnReceied;
+        webSocket.Disconnected += Disconnected;
         webSocket.Setup(new TouchSocketConfig().SetRemoteIPHost(Setting.Current.WebSocketIPHost));
         try
         {
@@ -41,7 +45,7 @@ public partial class CMDPage : ContentPage
             await DisplayAlert("Socket连接失败", ex.Message, "OK");
         }
     }
-    async void OnReceied(WebSocketClient s, WSDataFrame e)
+    private void OnReceied(WebSocketClient s, WSDataFrame e)
 	{
         string msg = e.ToText();
         if (string.IsNullOrEmpty(msg))
@@ -56,25 +60,67 @@ public partial class CMDPage : ContentPage
             {
                 case CMDType.UserMgr://注册结果
                     {
-                        if(bool.TryParse(cmdMsg.Parameter as string, out bool result))
+                        if(bool.TryParse(cmdMsg.Parameter.ToString(), out bool result))
                         {
-                            if(result)
+                            if(!result)
                             {
-                                await DisplayAlert("失败", "注册控制端失败", "OK");
+                                MainThread.BeginInvokeOnMainThread(async() =>
+                                {
+                                    await DisplayAlert("失败", "注册控制端失败", "OK");
+                                });
                             }
                             else
                             {
-                                await DisplayAlert("成功", "已注册控制端", "OK");
+                                AppendOutput("已注册控制端");
                             }
                         }
                     }break;
                 case CMDType.ExcuteCMDResult:
                     {
                         //CMD执行结果
-                        //TODO:输出
+                        AppendOutput(cmdMsg.Parameter.ToString());
                     }
                     break;
             }
         }
+    }
+
+    private void Disconnected(ITcpClientBase client, DisconnectEventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            Console.WriteLine($"已断开socket连接:{e.Message}");
+            await DisplayAlert("已断开socket连接", e.Message, "OK");
+        });
+    }
+
+    private void AppendOutput(string str)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            ResultLabel.Text = output.AppendLine($"[{DateTime.Now}]{str}").ToString();
+        });
+    }
+    private void ClearOutput()
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            output.Clear();
+            ResultLabel.Text = string.Empty;
+        });
+    }
+    /// <summary>
+    /// 执行
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        AppendOutput("执行指令");
+    }
+
+    private void ClearButton_Clicked(object sender, EventArgs e)
+    {
+        ClearOutput();
     }
 }
