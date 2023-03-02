@@ -21,12 +21,12 @@
             Title="脚本"
             ContentTemplate="{DataTemplate pages:BatPage}"
             Icon="bat.png"
-            Route="MainPage" />
+            Route="BatPage" />
         <ShellContent
             Title="指令"
             ContentTemplate="{DataTemplate pages:CMDPage}"
             Icon="cmd.png"
-            Route="MainPage" />
+            Route="CMDPage" />
         <ShellContent
             Title="设置"
             ContentTemplate="{DataTemplate pages:SettingPage}"

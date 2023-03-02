@@ -1,5 +1,7 @@
+using Microsoft.Maui.LifecycleEvents;
 using Newtonsoft.Json;
 using PCController.Core.Helpers;
+using PCController.Core.Models;
 using PCController.Core.MsgParameter;
 using PCController.UserUI.Models;
 
@@ -28,7 +30,32 @@ public partial class ExcuteBatPage : ContentPage
 		var p = GetBatParameter();
 		p.HostName = Setting.Current.HostName;
 		p.HostPassword= Setting.Current.HostPassword;
-        await HttpHelper.PostJsonAsync($"{Setting.Current.WebAPIIPHost}/excutebat", JsonConvert.SerializeObject(p));
-        await Navigation.PopAsync();
+        ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
+        var result = await HttpHelper.PostJsonAsync($"{Setting.Current.WebAPIIPHost}/excutebat", JsonConvert.SerializeObject(p));
+		activityIndicator.IsRunning = false;
+		if(string.IsNullOrEmpty(result))
+		{
+            await DisplayAlert("失败", "未成功执行脚本，请检查网络连接", "OK");
+        }
+		else
+		{
+			var rq = JsonConvert.DeserializeObject<RequestResult>(result);
+			if(rq == null)
+			{
+                await DisplayAlert("失败", "未成功执行脚本，未知错误", "OK");
+            }
+			else
+			{
+				if(rq.Successful)
+				{
+                    ToolTipProperties.SetText(sender as Button, "成功执行脚本");
+                    await Navigation.PopAsync();
+                }
+				else
+				{
+                    await DisplayAlert("失败", rq.Msg, "OK");
+                }
+			}
+		}
     }
 }

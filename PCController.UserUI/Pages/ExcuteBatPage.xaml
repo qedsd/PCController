@@ -3,32 +3,53 @@
     x:Class="PCController.UserUI.Pages.ExcuteBatPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="ExcuteBatPage">
+    Title="执行脚本">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <VerticalStackLayout>
-            <Label x:Name="BatName" HorizontalOptions="Center" />
-            <HorizontalStackLayout>
-                <Label Text="UseShellExecute" />
-                <Switch x:Name="UseShellExecute" IsToggled="False" />
+        <VerticalStackLayout Margin="10">
+            <Label
+                x:Name="BatName"
+                FontSize="Medium"
+                HorizontalOptions="Center" />
+            <HorizontalStackLayout Margin="0,10">
+                <Label
+                    Text="UseShellExecute"
+                    VerticalOptions="Center"
+                    WidthRequest="140" />
+                <Switch
+                    x:Name="UseShellExecute"
+                    IsToggled="False"
+                    ThumbColor="BlueViolet" />
             </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="CreateNoWindow" />
-                <Switch x:Name="CreateNoWindow" IsToggled="False" />
+            <HorizontalStackLayout Margin="0,10">
+                <Label
+                    Text="CreateNoWindow"
+                    VerticalOptions="Center"
+                    WidthRequest="140" />
+                <Switch
+                    x:Name="CreateNoWindow"
+                    IsToggled="False"
+                    ThumbColor="BlueViolet" />
             </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="管理员模式允许" />
-                <Switch x:Name="Admin" IsToggled="False" />
+            <HorizontalStackLayout Margin="0,10">
+                <Label
+                    Text="管理员模式运行"
+                    VerticalOptions="Center"
+                    WidthRequest="140" />
+                <Switch
+                    x:Name="Admin"
+                    IsToggled="False"
+                    ThumbColor="BlueViolet" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
         <Button
             Grid.Row="1"
+            Clicked="Button_Clicked"
             Text="执行"
-            VerticalOptions="End" 
-            Clicked="Button_Clicked"/>
+            VerticalOptions="End" />
     </Grid>
 </ContentPage>

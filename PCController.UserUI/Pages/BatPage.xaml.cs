@@ -48,7 +48,7 @@ public partial class BatPage : ContentPage
 		string bat = (sender as ListView).SelectedItem.ToString();
         (sender as ListView).SelectedItem = null;
         ExcuteBatPage page = new ExcuteBatPage(bat);
-        //page.NavigatingFrom += Page_NavigatingFrom;
+        page.NavigatingFrom += Page_NavigatingFrom;
         await Navigation.PushAsync(page);
     }
 
