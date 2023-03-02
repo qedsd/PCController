@@ -16,6 +16,10 @@ namespace PCController.Core.Enums
         /// </summary>
         HostMgr,
         /// <summary>
+        /// 管理控制端
+        /// </summary>
+        UserMgr,
+        /// <summary>
         /// 获取光标位置
         /// </summary>
         GetCursor, 
@@ -47,5 +51,13 @@ namespace PCController.Core.Enums
         /// 获取bat脚本列表
         /// </summary>
         GetBatList,
+        /// <summary>
+        /// 执行CMD命令
+        /// </summary>
+        ExcuteCMD,
+        /// <summary>
+        /// 执行CMD命令结果
+        /// </summary>
+        ExcuteCMDResult,
     }
 }

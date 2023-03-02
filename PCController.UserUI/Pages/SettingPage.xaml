@@ -13,14 +13,14 @@
             <TableView Intent="Form">
                 <TableRoot>
                     <TableSection>
-                        <EntryCell x:Name="WebSocketIPHost" Label="WebSocket地址" />
+                        <EntryCell x:Name="WebSocketIPHost" Label="WebSocket" />
                     </TableSection>
                 </TableRoot>
             </TableView>
             <TableView Intent="Form">
                 <TableRoot>
                     <TableSection>
-                        <EntryCell x:Name="WebAPIIPHost" Label="WebAPI地址" />
+                        <EntryCell x:Name="WebAPIIPHost" Label="WebAPI" />
                     </TableSection>
                 </TableRoot>
             </TableView>

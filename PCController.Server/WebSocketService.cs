@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PCController.Core.Enums;
 using PCController.Core.Models;
 using PCController.Core.MsgParameter;
 using System.Security.Authentication;
@@ -79,6 +80,22 @@ namespace PCController.Server
                             //主机回复bat列表
                             //var host = JsonConvert.DeserializeObject<List<string>>(JsonConvert.SerializeObject(msg.Parameter));
                             Current.OnReceivedBatList?.Invoke(msg);
+                        }
+                        break;
+                    case Core.Enums.CMDType.UserMgr:
+                        {
+                            //注册控制端
+                            //控制端注册时也是传HostItem类型，用以校验
+                            var host = JsonConvert.DeserializeObject<HostItem>(JsonConvert.SerializeObject(msg.Host));
+                            if (host != null)
+                            {
+                                if(HostServer.Current.IsValid(host))
+                                {
+                                    bool su = UserServer.Current.Add(host.Name, new UserItem() { Client = client as HttpSocketClient });
+                                    CMDMsg backToUserMsg = new CMDMsg(CMDType.UserMgr,su);
+                                    (client as HttpSocketClient)?.SendWithWS(JsonConvert.SerializeObject(msg));
+                                }
+                            }
                         }
                         break;
                 }

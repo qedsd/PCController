@@ -8,5 +8,5 @@
     <ContentPage.Resources>
         <converters:FileNameConverter x:Key="FileNameConverter" />
     </ContentPage.Resources>
-    <ListView x:Name="BatList" ItemTapped="BatList_ItemTapped"/>
+    <ListView x:Name="BatList" ItemTapped="BatList_ItemTapped" />
 </ContentPage>

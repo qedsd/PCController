@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PCController.UserUI.Pages.CMDPage"
-             Title="CMDPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="PCController.UserUI.Pages.CMDPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="CMDPage">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label
+            x:Name="ResultLabel"
+            Margin="0,10"
+            Padding="10"
+            BackgroundColor="LightGray"
+            LineBreakMode="WordWrap"
+            Text="于此处显示PC返回消息" />
+        <TableView
+            Grid.Row="1"
+            Margin="0,10"
+            Intent="Form">
+            <TableRoot>
+                <TableSection>
+                    <EntryCell x:Name="FileName" Label="FileName" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Label
+            x:Name="InputLabel"
+            Grid.Row="2"
+            Margin="0,10"
+            BackgroundColor="LightGray"
+            LineBreakMode="WordWrap"
+            Text="输入命令..."
+            VerticalOptions="Fill" />
+    </Grid>
 </ContentPage>

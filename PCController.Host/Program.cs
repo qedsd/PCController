@@ -98,6 +98,16 @@ void OnReceied(WebSocketClient s, WSDataFrame e)
                     myWSClient.SendWithWS(backMsg);
                 }
                 break;
+            case CMDType.ExcuteCMD:
+                {
+                    string result = CMD.ExcuteCMD(cmdMsg.Parameter);
+                    if(!string.IsNullOrEmpty(result))
+                    {
+                        string backMsg = new CMDMsg(setting.Name, Md5Helper.ToMd5(setting.Password), CMDType.ExcuteCMDResult, result).ToString();
+                        myWSClient.SendWithWS(backMsg);
+                    }
+                }
+                break;
         }
     }
 }
