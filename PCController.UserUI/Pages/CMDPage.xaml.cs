@@ -134,9 +134,10 @@ public partial class CMDPage : ContentPage
 
     private void AppendOutput(string str)
     {
-        MainThread.BeginInvokeOnMainThread(() =>
+        MainThread.BeginInvokeOnMainThread(async() =>
         {
             ResultLabel.Text = output.AppendLine($"[{DateTime.Now}]{str}").ToString();
+            await ResultLabelScrollView.ScrollToAsync(ResultLabelScrollView.ScrollX, ResultLabelScrollView.ContentSize.Height * 2, true);
         });
     }
     private void ClearOutput()
@@ -222,5 +223,21 @@ public partial class CMDPage : ContentPage
     {
         Setting.Current.Admin = e.Value;
         Setting.Current.Save();
+    }
+
+    private async void BatButton_Clicked(object sender, EventArgs e)
+    {
+        BatPage page = new BatPage();
+        page.NavigatedFrom += Page_NavigatedFrom;
+        await Navigation.PushAsync(page);
+    }
+
+    private void Page_NavigatedFrom(object sender, NavigatedFromEventArgs e)
+    {
+        var page = sender as BatPage;
+        if(page.SelectedBat != null)
+        {
+            FileName.Text = page.SelectedBat;
+        }
     }
 }

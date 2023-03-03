@@ -14,7 +14,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid x:Name="Content1" Grid.ColumnSpan="2">
-            <ScrollView Padding="10" HorizontalScrollBarVisibility="Never">
+            <ScrollView Padding="10" HorizontalScrollBarVisibility="Never" x:Name="ResultLabelScrollView">
                 <Label
                     x:Name="ResultLabel"
                     BackgroundColor="WhiteSmoke"
@@ -42,16 +42,18 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TableView Grid.Row="0" Intent="Form">
-                <TableRoot>
-                    <TableSection>
-                        <EntryCell
-                            x:Name="FileName"
-                            Label="FileName"
-                            Text="cmd.exe" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Text="FileName" VerticalOptions="Center" />
+                <Editor
+                    x:Name="FileName"
+                    Grid.Column="1"
+                    Margin="4,0,0,0" 
+                    />
+            </Grid>
             <Editor
                 x:Name="InputEditor"
                 Grid.Row="1"
@@ -107,16 +109,23 @@
             </Grid>
             <Grid Grid.Row="3" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
+                <ImageButton
+                    Grid.Column="0"
+                    Clicked="BatButton_Clicked"
+                    HeightRequest="24"
+                    Source="bat.png"
+                    WidthRequest="24" />
                 <Button
-                    Margin="34,0,0,0"
+                    Grid.Column="1"
+                    Margin="10,0"
                     Clicked="Button_Clicked"
                     Text="执行" />
                 <ImageButton
-                    Grid.Column="1"
-                    Margin="10,0"
+                    Grid.Column="2"
                     Clicked="SettingButton_Clicked"
                     HeightRequest="24"
                     Source="setting.png"

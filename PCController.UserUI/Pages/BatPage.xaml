@@ -8,5 +8,19 @@
     <ContentPage.Resources>
         <converters:FileNameConverter x:Key="FileNameConverter" />
     </ContentPage.Resources>
-    <ListView x:Name="BatList" ItemTapped="BatList_ItemTapped" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="BatList" ItemTapped="BatList_ItemTapped" />
+        <Label
+            Grid.Row="1"
+            Margin="0,10"
+            FontAttributes="Italic"
+            FontSize="Small"
+            HorizontalOptions="Center"
+            Text="此处显示目标电脑上CMD文件夹下的bat脚本"
+            TextColor="Gray" />
+    </Grid>
 </ContentPage>

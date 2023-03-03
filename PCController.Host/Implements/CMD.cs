@@ -45,7 +45,7 @@ namespace PCController.Host.Implements
                 if(files != null)
                 {
                     //返回文件名
-                    return files.Where(p=>p.EndsWith(".bat", StringComparison.OrdinalIgnoreCase)).Select(p=>System.IO.Path.GetFileNameWithoutExtension(p)).ToList();
+                    return files.Where(p=>p.EndsWith(".bat", StringComparison.OrdinalIgnoreCase)).ToList();
                 }
             }
             return null;
