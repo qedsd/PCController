@@ -9,6 +9,7 @@ namespace PCController.UserUI.Pages;
 public partial class PickKeyPage : ContentPage
 {
     public List<KeyStatus> KeyStatuses { get; set; }
+    private static List<KeyboardItem> keyboardItems;
 	public PickKeyPage()
 	{
 		InitializeComponent();
@@ -16,24 +17,28 @@ public partial class PickKeyPage : ContentPage
     }
     private async void Init()
     {
-        string localPath = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "keylist.csv");
-        if (!System.IO.File.Exists(localPath))
+        if(keyboardItems == null)
         {
-            string content;
-            using (Stream stream = await FileSystem.OpenAppPackageFileAsync("keylist.csv"))
+            string localPath = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "keylist.csv");
+            if (!System.IO.File.Exists(localPath))
             {
-                using (StreamReader reader = new StreamReader(stream))
+                string content;
+                using (Stream stream = await FileSystem.OpenAppPackageFileAsync("keylist.csv"))
                 {
-                    content = reader.ReadToEnd();
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        content = reader.ReadToEnd();
+                    }
                 }
+                System.IO.File.WriteAllText(localPath, content);
             }
-            System.IO.File.WriteAllText(localPath, content);
+            var lines = System.IO.File.ReadAllLines(localPath);
+            if (lines != null && lines.Length != 0)
+            {
+                keyboardItems = lines.Select(p => KeyboardItem.FromCsv(p)).ToList();
+            }
         }
-        var lines = System.IO.File.ReadAllLines(localPath);
-        if (lines != null && lines.Length != 0)
-        {
-            KeyList.ItemsSource = lines.Select(p => KeyboardItem.FromCsv(p)).ToList();
-        }
+        KeyList.ItemsSource = keyboardItems?.ToList();
     }
 
     /// <summary>
