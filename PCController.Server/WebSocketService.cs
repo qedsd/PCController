@@ -98,6 +98,27 @@ namespace PCController.Server
                             }
                         }
                         break;
+                    case Core.Enums.CMDType.ExcuteCMDResult:
+                        {
+                            //Host返回执行指令结果
+                            //传HostItem类型，用以校验
+                            //转发给用户控制端
+                            Console.WriteLine("转发CMD结果回控制端");
+                            var host = JsonConvert.DeserializeObject<HostItem>(JsonConvert.SerializeObject(msg.Host));
+                            if (host != null)
+                            {
+                                if (HostServer.Current.IsValid(host))
+                                {
+                                    var userItem = UserServer.Current.Find(host.Name);
+                                    if(userItem != null)
+                                    {
+                                        CMDMsg backToUserMsg = new CMDMsg(CMDType.ExcuteCMDResult, msg.Parameter);
+                                        (userItem.Client as HttpSocketClient)?.SendWithWS(JsonConvert.SerializeObject(backToUserMsg));
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
             }
         }

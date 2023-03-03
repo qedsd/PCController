@@ -4,55 +4,124 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="指令">
-    <Grid Margin="10">
+    <Grid Margin="10,4,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollView
-            Margin="0,0,0,0"
-            Padding="10"
-            HorizontalScrollBarVisibility="Never">
-            <Label
-                x:Name="ResultLabel"
-                BackgroundColor="WhiteSmoke"
-                LineBreakMode="WordWrap"
-                Text="于此处显示PC返回消息" />
-        </ScrollView>
-        <ImageButton
-            Margin="0,0,10,0"
-            Padding="2"
-            Clicked="ClearButton_Clicked"
-            HeightRequest="24"
-            HorizontalOptions="End"
-            Source="clear.png"
-            VerticalOptions="End"
-            WidthRequest="24" />
-        <TableView
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Content1" Grid.ColumnSpan="2">
+            <ScrollView Padding="10" HorizontalScrollBarVisibility="Never">
+                <Label
+                    x:Name="ResultLabel"
+                    BackgroundColor="WhiteSmoke"
+                    LineBreakMode="WordWrap"
+                    Text="于此处显示PC返回消息" />
+            </ScrollView>
+            <ImageButton
+                Margin="0,0,10,10"
+                Padding="2"
+                Clicked="ClearButton_Clicked"
+                HeightRequest="24"
+                HorizontalOptions="End"
+                Source="clear.png"
+                VerticalOptions="End"
+                WidthRequest="24" />
+        </Grid>
+        <Grid
+            x:Name="Content2"
             Grid.Row="1"
-            Intent="Form">
-            <TableRoot>
-                <TableSection>
-                    <EntryCell
-                        x:Name="FileName"
-                        Label="FileName"
-                        Text="cmd.exe" />
-                </TableSection>
-            </TableRoot>
-        </TableView>
-        <Editor
-            x:Name="InputEditor"
-            Grid.Row="2"
-            Margin="0,0"
-            IsTextPredictionEnabled="False"
-            Placeholder="输入命令..."
-            VerticalOptions="Fill" />
-        <Button
-            Grid.Row="3"
-            Margin="0,0,0,10"
-            Clicked="Button_Clicked"
-            Text="执行" />
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TableView Grid.Row="0" Intent="Form">
+                <TableRoot>
+                    <TableSection>
+                        <EntryCell
+                            x:Name="FileName"
+                            Label="FileName"
+                            Text="cmd.exe" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Editor
+                x:Name="InputEditor"
+                Grid.Row="1"
+                Margin="0,0"
+                IsTextPredictionEnabled="False"
+                Placeholder="输入命令..."
+                VerticalOptions="Fill" />
+            <Grid
+                x:Name="SettingGrid"
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                IsVisible="False">
+                <VerticalStackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <HorizontalStackLayout Grid.Column="0" HorizontalOptions="End">
+                            <Label Text="使用Shell" VerticalOptions="Center" />
+                            <CheckBox x:Name="UseShellExecute" CheckedChanged="UseShellExecute_CheckedChanged" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End">
+                            <Label Text="重定向输入" VerticalOptions="Center" />
+                            <CheckBox x:Name="RedirectStandardInput" CheckedChanged="RedirectStandardInput_CheckedChanged" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                            <Label Text="重定向输出" VerticalOptions="Center" />
+                            <CheckBox x:Name="RedirectStandardOutput" CheckedChanged="RedirectStandardOutput_CheckedChanged" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <HorizontalStackLayout Grid.Column="0" HorizontalOptions="End">
+                            <Label Text="重定向错误" VerticalOptions="Center" />
+                            <CheckBox x:Name="RedirectStandardError" CheckedChanged="RedirectStandardError_CheckedChanged" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End">
+                            <Label Text="无窗口" VerticalOptions="Center" />
+                            <CheckBox x:Name="CreateNoWindow" CheckedChanged="CreateNoWindow_CheckedChanged" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                            <Label Text="管理员模式" VerticalOptions="Center" />
+                            <CheckBox x:Name="Admin" CheckedChanged="Admin_CheckedChanged" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+            <Grid Grid.Row="3" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Margin="34,0,0,0"
+                    Clicked="Button_Clicked"
+                    Text="执行" />
+                <ImageButton
+                    Grid.Column="1"
+                    Margin="10,0"
+                    Clicked="SettingButton_Clicked"
+                    HeightRequest="24"
+                    Source="setting.png"
+                    WidthRequest="24" />
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

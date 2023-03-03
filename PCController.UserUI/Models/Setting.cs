@@ -21,6 +21,14 @@ namespace PCController.UserUI.Models
         /// </summary>
         public string HostPassword { get; set; }
         public double MouseStep { get; set; } = 10;
+
+        public bool UseShellExecute { get; set; } = false;
+        public bool RedirectStandardInput { get; set; } = true;
+        public bool RedirectStandardOutput { get; set; } = true;
+        public bool RedirectStandardError { get; set; } = true;
+        public bool CreateNoWindow { get; set; } = true;
+        public bool Admin { get; set; } = false;
+
         public static Setting Current { get; set; }
         public static Setting Load()
         {

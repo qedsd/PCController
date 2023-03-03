@@ -79,5 +79,17 @@ namespace PCController.Server
             }
 
         }
+
+        internal UserItem Find(string hostName)
+        {
+            if(Users.TryGetValue(hostName, out var v))
+            {
+                return v;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

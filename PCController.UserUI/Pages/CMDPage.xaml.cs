@@ -2,6 +2,8 @@ using Newtonsoft.Json;
 using PCController.Core.Enums;
 using PCController.Core.Helpers;
 using PCController.Core.Models;
+using PCController.Core.MsgParameter;
+using PCController.UserUI.Controllers;
 using PCController.UserUI.Models;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -20,11 +22,48 @@ public partial class CMDPage : ContentPage
 	{
 		InitializeComponent();
         Loaded += CMDPage_Loaded;
-	}
+        DeviceDisplay.Current.MainDisplayInfoChanged += Current_MainDisplayInfoChanged;
+        //InputEditor.SetValue(Grid.RowProperty, 0);
+    }
+
+    private void Current_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+    {
+        SetContent();
+    }
+    private void SetContent()
+    {
+        if (DeviceDisplay.Current.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+        {
+            //竖屏
+            Content1.SetValue(Grid.ColumnSpanProperty, 2);
+            Content1.SetValue(Grid.RowSpanProperty, 1);
+            Content2.SetValue(Grid.RowProperty, 1);
+            Content2.SetValue(Grid.ColumnProperty, 0);
+            Content2.SetValue(Grid.ColumnSpanProperty, 2);
+            Content2.SetValue(Grid.RowSpanProperty, 1);
+        }
+        else
+        {
+            //横盘
+            Content1.SetValue(Grid.ColumnSpanProperty, 1);
+            Content1.SetValue(Grid.RowSpanProperty, 2);
+            Content2.SetValue(Grid.ColumnProperty, 1);
+            Content2.SetValue(Grid.ColumnSpanProperty, 1);
+            Content2.SetValue(Grid.RowProperty, 0);
+            Content2.SetValue(Grid.RowSpanProperty, 2);
+        }
+    }
 
     private void CMDPage_Loaded(object sender, EventArgs e)
     {
+        SetContent();
         InitWebSocket();
+        UseShellExecute.IsChecked = Setting.Current.UseShellExecute;
+        RedirectStandardInput.IsChecked = Setting.Current.RedirectStandardInput;
+        RedirectStandardOutput.IsChecked = Setting.Current.RedirectStandardOutput;
+        RedirectStandardError.IsChecked = Setting.Current.RedirectStandardError;
+        CreateNoWindow.IsChecked = Setting.Current.CreateNoWindow;
+        Admin.IsChecked = Setting.Current.Admin;
     }
 
     private async void InitWebSocket()
@@ -114,13 +153,75 @@ public partial class CMDPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-        AppendOutput("执行指令");
+        (sender as Button).IsEnabled = false;
+        CMDParameter parameter = new CMDParameter()
+        {
+            FileName = FileName.Text,
+            UseShellExecute = UseShellExecute.IsChecked,
+            RedirectStandardInput = RedirectStandardInput.IsChecked,
+            RedirectStandardOutput = RedirectStandardOutput.IsChecked,
+            RedirectStandardError = RedirectStandardError.IsChecked,
+            CreateNoWindow = CreateNoWindow.IsChecked,
+            Admin = Admin.IsChecked,
+            CMD = InputEditor.Text
+        };
+        var result = await CMDControllercs.ExcuteAsync(parameter);
+        if(result != null)
+        {
+            AppendOutput(result.Successful ? "执行指令成功": $"执行指令失败:{result.Msg}");
+        }
+        else
+        {
+            AppendOutput("执行指令失败，请检查网络连接");
+        }
+        (sender as Button).IsEnabled = true;
     }
 
     private void ClearButton_Clicked(object sender, EventArgs e)
     {
         ClearOutput();
+    }
+
+    private void SettingButton_Clicked(object sender, EventArgs e)
+    {
+        SettingGrid.IsVisible = !SettingGrid.IsVisible;
+    }
+
+    private void UseShellExecute_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.UseShellExecute = e.Value;
+        Setting.Current.Save();
+    }
+
+    private void RedirectStandardInput_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.RedirectStandardInput = e.Value;
+        Setting.Current.Save();
+    }
+
+    private void RedirectStandardOutput_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.RedirectStandardOutput = e.Value;
+        Setting.Current.Save();
+    }
+
+    private void RedirectStandardError_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.RedirectStandardError = e.Value;
+        Setting.Current.Save();
+    }
+
+    private void CreateNoWindow_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.CreateNoWindow = e.Value;
+        Setting.Current.Save();
+    }
+
+    private void Admin_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        Setting.Current.Admin = e.Value;
+        Setting.Current.Save();
     }
 }

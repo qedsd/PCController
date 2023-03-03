@@ -106,6 +106,11 @@ void OnReceied(WebSocketClient s, WSDataFrame e)
                         string backMsg = new CMDMsg(setting.Name, Md5Helper.ToMd5(setting.Password), CMDType.ExcuteCMDResult, result).ToString();
                         myWSClient.SendWithWS(backMsg);
                     }
+                    else
+                    {
+                        string backMsg = new CMDMsg(setting.Name, Md5Helper.ToMd5(setting.Password), CMDType.ExcuteCMDResult, "执行结果为空").ToString();
+                        myWSClient.SendWithWS(backMsg);
+                    }
                 }
                 break;
         }
