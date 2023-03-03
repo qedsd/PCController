@@ -9,36 +9,38 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <VerticalStackLayout Margin="10,0">
-            <TableView Intent="Form">
-                <TableRoot>
-                    <TableSection>
-                        <EntryCell x:Name="WebSocketIPHost" Label="WebSocket" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Form">
-                <TableRoot>
-                    <TableSection>
-                        <EntryCell x:Name="WebAPIIPHost" Label="WebAPI" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Form">
-                <TableRoot>
-                    <TableSection>
-                        <EntryCell x:Name="HostName" Label="主机名称" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Form">
-                <TableRoot>
-                    <TableSection>
-                        <EntryCell x:Name="Password" Label="主机密码" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-        </VerticalStackLayout>
+        <ScrollView Margin="10,0">
+            <VerticalStackLayout>
+                <TableView Intent="Form">
+                    <TableRoot>
+                        <TableSection>
+                            <EntryCell x:Name="WebSocketIPHost" Label="WebSocket" />
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+                <TableView Intent="Form">
+                    <TableRoot>
+                        <TableSection>
+                            <EntryCell x:Name="WebAPIIPHost" Label="WebAPI" />
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+                <TableView Intent="Form">
+                    <TableRoot>
+                        <TableSection>
+                            <EntryCell x:Name="HostName" Label="主机名称" />
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+                <TableView Intent="Form">
+                    <TableRoot>
+                        <TableSection>
+                            <EntryCell x:Name="Password" Label="主机密码" />
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </VerticalStackLayout>
+        </ScrollView>
         <Button
             Grid.Row="1"
             Margin="20,20,20,10"

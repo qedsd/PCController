@@ -12,6 +12,43 @@ public partial class ControlPage : ContentPage
 		InitializeComponent();
         InitShortcut();
         InitMouseStep();
+        Loaded += ControlPage_Loaded;
+        DeviceDisplay.Current.MainDisplayInfoChanged += Current_MainDisplayInfoChanged;
+    }
+
+    private void ControlPage_Loaded(object sender, EventArgs e)
+    {
+        SetContent();
+    }
+
+    private void Current_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
+    {
+        SetContent();
+    }
+    private void SetContent()
+    {
+        if (DeviceDisplay.Current.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+        {
+            // ˙∆¡
+            Content1.SetValue(Grid.ColumnSpanProperty, 2);
+            Content1.SetValue(Grid.RowSpanProperty, 1);
+            Content2.SetValue(Grid.RowProperty, 1);
+            Content2.SetValue(Grid.ColumnProperty, 0);
+            Content2.SetValue(Grid.ColumnSpanProperty, 2);
+            Content2.SetValue(Grid.RowSpanProperty, 1);
+            MouseStepGrid.IsVisible = true;
+        }
+        else
+        {
+            //∫·≈Ã
+            Content1.SetValue(Grid.ColumnSpanProperty, 1);
+            Content1.SetValue(Grid.RowSpanProperty, 2);
+            Content2.SetValue(Grid.ColumnProperty, 1);
+            Content2.SetValue(Grid.ColumnSpanProperty, 1);
+            Content2.SetValue(Grid.RowProperty, 0);
+            Content2.SetValue(Grid.RowSpanProperty, 2);
+            MouseStepGrid.IsVisible = false;
+        }
     }
     #region  Û±Íøÿ÷∆
     private ImageButton MouseImageButton;

@@ -7,63 +7,77 @@
     Title="控制">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="0,0,0,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Content1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MouseOuterArea_Tapped" />
-                    <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MouseOuterArea_Tapped2" />
-                </Grid.GestureRecognizers>
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MouseOuterArea_Tapped" />
+                        <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MouseOuterArea_Tapped2" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <HorizontalStackLayout
+                    HeightRequest="200"
+                    HorizontalOptions="Center"
+                    Loaded="HorizontalStackLayout_Loaded"
+                    WidthRequest="200">
+                    <Path
+                        Fill="Gray"
+                        HorizontalOptions="Center"
+                        Stroke="Gray"
+                        VerticalOptions="Center">
+                        <Path.Data>
+                            <EllipseGeometry
+                                Center="100,100"
+                                RadiusX="100"
+                                RadiusY="100" />
+                        </Path.Data>
+                    </Path>
+                </HorizontalStackLayout>
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    HeightRequest="100"
+                    Loaded="ImageButton_Loaded"
+                    Source="circle.png"
+                    WidthRequest="100" />
+                <HorizontalStackLayout
+                    HeightRequest="200"
+                    HorizontalOptions="Center"
+                    WidthRequest="200">
+                    <Path
+                        Fill="#00FFFFFF"
+                        HorizontalOptions="Center"
+                        Stroke="#00FFFFFF"
+                        VerticalOptions="Center">
+                        <Path.Data>
+                            <EllipseGeometry
+                                Center="100,100"
+                                RadiusX="100"
+                                RadiusY="100" />
+                        </Path.Data>
+                        <Path.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MousePan_Tapped" />
+                            <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MousePan_Tapped2" />
+                            <PanGestureRecognizer PanUpdated="OnMousePanUpdated" />
+                        </Path.GestureRecognizers>
+                    </Path>
+                </HorizontalStackLayout>
             </Grid>
-            <HorizontalStackLayout
-                HeightRequest="200"
-                HorizontalOptions="Center"
-                Loaded="HorizontalStackLayout_Loaded"
-                WidthRequest="200">
-                <Path
-                    Fill="Gray"
-                    HorizontalOptions="Center"
-                    Stroke="Gray"
-                    VerticalOptions="Center">
-                    <Path.Data>
-                        <EllipseGeometry
-                            Center="100,100"
-                            RadiusX="100"
-                            RadiusY="100" />
-                    </Path.Data>
-                </Path>
-            </HorizontalStackLayout>
-            <ImageButton
-                BackgroundColor="Transparent"
-                HeightRequest="100"
-                Loaded="ImageButton_Loaded"
-                Source="circle.png"
-                WidthRequest="100" />
-            <HorizontalStackLayout
-                HeightRequest="200"
-                HorizontalOptions="Center"
-                WidthRequest="200">
-                <Path
-                    Fill="#00FFFFFF"
-                    HorizontalOptions="Center"
-                    Stroke="#00FFFFFF"
-                    VerticalOptions="Center">
-                    <Path.Data>
-                        <EllipseGeometry
-                            Center="100,100"
-                            RadiusX="100"
-                            RadiusY="100" />
-                    </Path.Data>
-                    <Path.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="MousePan_Tapped" />
-                        <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="MousePan_Tapped2" />
-                        <PanGestureRecognizer PanUpdated="OnMousePanUpdated" />
-                    </Path.GestureRecognizers>
-                </Path>
-            </HorizontalStackLayout>
-            <Grid Margin="10,0" VerticalOptions="End">
+            <Grid
+                x:Name="MouseStepGrid"
+                Grid.Row="1"
+                Margin="0,0"
+                VerticalOptions="End">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -80,55 +94,58 @@
                     ToolTipProperties.Text="鼠标灵敏度"
                     Value="10" />
             </Grid>
-
         </Grid>
-        <Grid Grid.Row="1" Margin="0,20,0,0">
-            <CollectionView
-                x:Name="ShortcutCollection"
-                Grid.Row="1"
-                Margin="15"
-                HeightRequest="400"
-                ItemSizingStrategy="MeasureFirstItem"
-                SelectionMode="None">
-                <CollectionView.Header>
-                    <Grid>
-                        <Label
-                            HorizontalOptions="Center"
-                            Text="快捷键"
-                            TextColor="Gray"
-                            VerticalOptions="Center" />
-                        <ImageButton
-                            Margin="0,0,0,0"
-                            Padding="4"
-                            Clicked="EditShortcut_Clicked"
-                            HeightRequest="32"
-                            HorizontalOptions="End"
-                            Source="edit.png"
-                            WidthRequest="60" />
-                    </Grid>
-                </CollectionView.Header>
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        HorizontalItemSpacing="8"
-                        Orientation="Vertical"
-                        Span="3"
-                        VerticalItemSpacing="8" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Button Clicked="Shortcut_Clicked" Text="{x:Binding Name}" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <Grid
+            x:Name="Content2"
+            Grid.Row="1"
+            Margin="0,0,0,0">
+            <Grid>
+                <CollectionView
+                    x:Name="ShortcutCollection"
+                    Grid.Row="1"
+                    Margin="15"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    SelectionMode="None">
+                    <CollectionView.Header>
+                        <Grid>
+                            <Label
+                                HorizontalOptions="Center"
+                                Text="快捷键"
+                                TextColor="Gray"
+                                VerticalOptions="Center" />
+                            <ImageButton
+                                Margin="0,0,0,0"
+                                Padding="4"
+                                Clicked="EditShortcut_Clicked"
+                                HeightRequest="32"
+                                HorizontalOptions="End"
+                                Source="edit.png"
+                                WidthRequest="60" />
+                        </Grid>
+                    </CollectionView.Header>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="8"
+                            Orientation="Vertical"
+                            Span="3"
+                            VerticalItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button Clicked="Shortcut_Clicked" Text="{x:Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-        </Grid>
-        <Grid Grid.Row="1">
-            <Button
-                x:Name="EditShortcutButton2"
-                Clicked="EditShortcut_Clicked"
-                HorizontalOptions="Center"
-                Text="添加快捷键"
-                VerticalOptions="Center" />
+            </Grid>
+            <Grid>
+                <Button
+                    x:Name="EditShortcutButton2"
+                    Clicked="EditShortcut_Clicked"
+                    HorizontalOptions="Center"
+                    Text="添加快捷键"
+                    VerticalOptions="Center" />
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>

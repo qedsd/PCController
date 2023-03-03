@@ -23,7 +23,6 @@ public partial class CMDPage : ContentPage
 		InitializeComponent();
         Loaded += CMDPage_Loaded;
         DeviceDisplay.Current.MainDisplayInfoChanged += Current_MainDisplayInfoChanged;
-        //InputEditor.SetValue(Grid.RowProperty, 0);
     }
 
     private void Current_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
