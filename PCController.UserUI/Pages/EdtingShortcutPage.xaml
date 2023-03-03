@@ -33,6 +33,14 @@
                         <Grid>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="KeyStatusItem_Tapped" />
+                                <DragGestureRecognizer
+                                    CanDrag="True"
+                                    DragStarting="DragGestureRecognizer_DragStarting"
+                                    DragStartingCommandParameter="{Binding}" />
+                                <DropGestureRecognizer
+                                    AllowDrop="True"
+                                    Drop="DropGestureRecognizer_Drop"
+                                    DropCommandParameter="{Binding}" />
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />

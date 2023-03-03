@@ -149,4 +149,34 @@ public partial class EdtingShortcutPage : ContentPage
         }
     }
     #endregion
+
+    /// <summary>
+    /// 给拖动添加数据
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void DragGestureRecognizer_DragStarting(object sender, DragStartingEventArgs e)
+    {
+        e.Data.Properties.Add("Data", (sender as DragGestureRecognizer).DragStartingCommandParameter);
+    }
+    /// <summary>
+    /// 处理完成拖放动作
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void DropGestureRecognizer_Drop(object sender, DropEventArgs e)
+    {
+        var b = (sender as Element).Parent as Grid;
+        var targetData = (sender as DropGestureRecognizer).DropCommandParameter as KeyStatus;//要被替换的数据
+        if (e.Data.Properties.TryGetValue("Data", out var data))//拖动到此的数据
+        {
+            var sourceData = data as KeyStatus;
+            if (targetData != sourceData)
+            {
+                int index = Shortcut.KeyStatuses.IndexOf(targetData);
+                Shortcut.KeyStatuses.Remove(sourceData);
+                Shortcut.KeyStatuses.Insert(index, sourceData);
+            }
+        }
+    }
 }
