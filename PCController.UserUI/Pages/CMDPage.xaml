@@ -14,7 +14,10 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid x:Name="Content1" Grid.ColumnSpan="2">
-            <ScrollView Padding="10" HorizontalScrollBarVisibility="Never" x:Name="ResultLabelScrollView">
+            <ScrollView
+                x:Name="ResultLabelScrollView"
+                Padding="10"
+                HorizontalScrollBarVisibility="Never">
                 <Label
                     x:Name="ResultLabel"
                     BackgroundColor="WhiteSmoke"
@@ -51,8 +54,7 @@
                 <Editor
                     x:Name="FileName"
                     Grid.Column="1"
-                    Margin="4,0,0,0" 
-                    />
+                    Margin="4,0,0,0" />
             </Grid>
             <Editor
                 x:Name="InputEditor"
